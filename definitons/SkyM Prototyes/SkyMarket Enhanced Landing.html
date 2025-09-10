@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyMarket - The Future of Delivery & Aerial Services</title>
+    <meta name="description" content="Revolutionary marketplace connecting you with vetted couriers and licensed drone operators. Get anything delivered or captured with transparent pricing and real-time tracking.">
+    <meta name="keywords" content="drone delivery, courier services, aerial photography, marketplace, local delivery">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23667eea'/%3E%3Cstop offset='100%25' style='stop-color:%23764ba2'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M35 40 L50 25 L65 40 L50 75 Z' fill='white'/%3E%3C/svg%3E">
+    
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --dark: #0f172a;
+            --dark-light: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --white: #ffffff;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            
+            /* Spacing */
+            --container-padding: 2rem;
+            --section-padding: 6rem;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        /* Modern Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-slide-up {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        /* Enhanced Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🚁';
+            font-size: 1.5rem;
+            filter: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all var(--transition-normal);
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .cta-nav {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Enhanced Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.4s both;
+            max-width: 500px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 1s ease-out 0.8s both;
+        }
+
+        .hero-phone {
+            width: 300px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .phone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .phone-title {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .service-card-phone {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-card-phone:nth-child(2) {
+            background: var(--gradient-secondary);
+        }
+
+        .service-card-phone:nth-child(3) {
+            background: var(--gradient-accent);
+        }
+
+        .service-card-phone:nth-child(4) {
+            background: var(--gradient-dark);
+        }
+
+        .service-icon-phone {
+            font-size: 1.5rem;
+        }
+
+        /* Enhanced Services Section */
+        .services {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(180deg, var(--light) 0%, white 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Bento Grid Layout */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .bento-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Bento Grid Layout - Perfect Rectangle */
+        .bento-large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .bento-medium {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+
+        .bento-small {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        /* Enhanced card styling with subtle backgrounds */
+        .bento-card.delivery {
+            background: linear-gradient(135deg, #fef9f5 0%, #fff7ed 100%);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        .bento-card.delivery:hover {
+            background: linear-gradient(135deg, #fef7f0 0%, #fff7ed 100%);
+            border-color: rgba(249, 115, 22, 0.2);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
+        }
+
+        .bento-card.courier {
+            background: linear-gradient(135deg, #f8faff 0%, #f1f5f9 100%);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .bento-card.courier:hover {
+            background: linear-gradient(135deg, #f0f6ff 0%, #f1f5f9 100%);
+            border-color: rgba(59, 130, 246, 0.2);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .bento-card.aerial {
+            background: linear-gradient(135deg, #f0fdf9 0%, #f0f9ff 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .bento-card.aerial:hover {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0f9ff 100%);
+            border-color: rgba(16, 185, 129, 0.2);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        }
+
+        .bento-card.mapping {
+            background: linear-gradient(135deg, #fffef5 0%, #fefce8 100%);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+        }
+
+        .bento-card.mapping:hover {
+            background: linear-gradient(135deg, #fefbf0 0%, #fefce8 100%);
+            border-color: rgba(245, 158, 11, 0.2);
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Icon styling with better visual impact */
+        .service-icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .delivery .service-icon-container {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
+        }
+
+        .courier .service-icon-container {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
+        .aerial .service-icon-container {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        }
+
+        .mapping .service-icon-container {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform var(--transition-normal);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-icon.delivery { color: #ef4444; }
+        .service-icon.courier { color: #3b82f6; }
+        .service-icon.aerial { color: #10b981; }
+        .service-icon.mapping { color: #f59e0b; }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .service-description {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .service-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Enhanced Features Section */
+        .features {
+            padding: var(--section-padding) 0;
+            background: var(--dark);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1000" height="1000" fill="url(%23grid)"/></svg>');
+        }
+
+        .features-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all var(--transition-normal);
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Enhanced How It Works */
+        .how-it-works {
+            padding: var(--section-padding) 0;
+            background: linear-gradient(135deg, var(--light) 0%, white 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            margin: 0 2rem;
+            position: relative;
+        }
+
+        .timeline-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Enhanced Stats */
+        .stats {
+            padding: var(--section-padding) 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Enhanced Testimonials */
+        .testimonials {
+            padding: var(--section-padding) 0;
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Enhanced CTA */
+        .cta-section {
+            padding: var(--section-padding) 0;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-cta-primary {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-cta-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .btn-cta-secondary {
+            background: transparent;
+            color: white;
+            padding: 1.2rem 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 280px);
+            }
+
+            .bento-large {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-medium {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .bento-small {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --container-padding: 1rem;
+                --section-padding: 4rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-phone {
+                width: 250px;
+                height: 500px;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 60px;
+            }
+
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                margin: 0;
+            }
+
+            .timeline-number {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Mobile Bento Grid */
+            .services-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(4, auto);
+                gap: 1rem;
+            }
+
+            .bento-large,
+            .bento-medium,
+            .bento-small {
+                grid-column: span 1;
+                grid-row: span 1;
+                min-height: 280px;
+            }
+
+            .bento-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Enhanced Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="logo">
+                SkyMarket
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-nav">
+                <span>Get Started</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Enhanced Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge scroll-animate">
+                        <i class="fas fa-star"></i>
+                        <span>Trusted by 10,000+ users</span>
+                    </div>
+                    <h1 class="hero-title scroll-animate">
+                        Get Anything<br>Delivered or Captured
+                    </h1>
+                    <p class="hero-subtitle scroll-animate">
+                        The revolutionary marketplace that connects you with vetted couriers and licensed drone operators. Compare providers, transparent pricing, and real-time tracking—all in one place.
+                    </p>
+                    <div class="hero-cta scroll-animate">
+                        <a href="#services" class="btn-primary">
+                            <span>Start Browsing</span>
+                            <i class="fas fa-rocket"></i>
+                        </a>
+                        <a href="#how-it-works" class="btn-secondary">
+                            <span>See How It Works</span>
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                    <div class="hero-stats scroll-animate" style="margin-top: 2rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-check-circle"></i>
+                            <span>95% On-time delivery</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Verified providers</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fas fa-clock"></i>
+                            <span>60s booking time</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-phone">
+                        <div class="phone-screen">
+                            <div class="phone-header">
+                                <div class="phone-title">SkyMarket</div>
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="service-card-phone">
+                                <i class="fas fa-utensils service-icon-phone"></i>
+                                <div>
+                                    <div style="font-weight: 600;">Food Delivery</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.8;">From $3.99 • 15-30 min</div>
+                                </div>
+                            </div>
+                            <div class="service-card-phone">
+                                <i class="fas fa-shipping-fast service-icon-phone"></i>
+                                <div>
+                                    <div style="font-weight: 600;">Courier Service</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.8;">From $5.99 • Same day</div>
+                                </div>
+                            </div>
+                            <div class="service-card-phone">
+                                <i class="fas fa-camera service-icon-phone"></i>
+                                <div>
+                                    <div style="font-weight: 600;">Aerial Photography</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.8;">From $50 • Licensed pilots</div>
+                                </div>
+                            </div>
+                            <div class="service-card-phone">
+                                <i class="fas fa-map-marked-alt service-icon-phone"></i>
+                                <div>
+                                    <div style="font-weight: 600;">Site Mapping</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.8;">From $75 • Survey grade</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">Choose Your Service</h2>
+                <p class="section-subtitle scroll-animate">
+                    From food delivery to professional aerial services, we have you covered with transparent pricing and vetted providers.
+                </p>
+            </div>
+            <div class="services-grid">
+                <!-- Large Feature Card - Food Delivery (2x2) -->
+                <div class="bento-card bento-large delivery scroll-animate">
+                    <div>
+                        <div class="service-icon-container">
+                            <i class="fas fa-utensils" style="color: white; font-size: 1.8rem;"></i>
+                        </div>
+                        <h3 class="service-title" style="font-size: 1.8rem; margin-bottom: 1rem; color: #1f2937;">Food Delivery</h3>
+                        <p class="service-description" style="font-size: 1.1rem; margin-bottom: 1.5rem; color: #6b7280; line-height: 1.6;">Get meals from your favorite local restaurants delivered fast with real-time tracking and no hidden fees.</p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #374151;">
+                                <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                                <span>15-30 minute delivery</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #374151;">
+                                <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Real-time tracking</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #374151;">
+                                <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                                <span>No hidden fees</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #374151;">
+                                <div style="width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Contactless delivery</span>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.15); padding: 1rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem;">
+                            <div style="width: 32px; height: 32px; background: rgba(249, 115, 22, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-store" style="color: #ea580c; font-size: 0.9rem;"></i>
+                            </div>
+                            <div style="font-size: 0.95rem; color: #ea580c; font-weight: 600;">
+                                200+ restaurants available
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="service-price" style="font-size: 1.5rem; margin-bottom: 1rem; color: #f97316; font-weight: 700;">From $3.99</div>
+                        <button style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); color: white; border: none; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; width: 100%; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);">
+                            Order Now <i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Medium Card - Courier Services (2x1) -->
+                <div class="bento-card bento-medium courier scroll-animate">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div class="service-icon-container" style="width: 48px; height: 48px; margin: 0;">
+                                <i class="fas fa-shipping-fast" style="color: white; font-size: 1.3rem;"></i>
+                            </div>
+                            <h3 class="service-title" style="margin: 0; color: #1f2937;">Courier Services</h3>
+                        </div>
+                        <p class="service-description" style="color: #6b7280; margin-bottom: 1rem; line-height: 1.5;">Send documents and packages across town with trusted local couriers.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.4rem; color: #374151;">
+                                <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Same-day delivery</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; color: #374151;">
+                                <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Package tracking</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; color: #374151;">
+                                <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Signature confirmation</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; color: #374151;">
+                                <div style="width: 6px; height: 6px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Insurance coverage</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="service-price" style="color: #3b82f6; font-weight: 700; font-size: 1.2rem;">From $5.99</div>
+                        <button style="background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 10px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Small Card - Aerial Imaging (1x1) -->
+                <div class="bento-card bento-small aerial scroll-animate">
+                    <div>
+                        <div class="service-icon-container" style="width: 48px; height: 48px;">
+                            <i class="fas fa-camera" style="color: white; font-size: 1.3rem;"></i>
+                        </div>
+                        <h3 class="service-title" style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #1f2937;">Aerial Imaging</h3>
+                        <p class="service-description" style="font-size: 0.9rem; color: #6b7280; margin-bottom: 1rem; line-height: 1.4;">Professional drone photography with licensed pilots.</p>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151; margin-bottom: 0.3rem;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>FAA Part-107 licensed</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151; margin-bottom: 0.3rem;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>High-resolution imagery</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Commercial rights</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="service-price" style="margin-bottom: 0.8rem; color: #10b981; font-weight: 700;">From $50</div>
+                        <button style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 0.7rem 1rem; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                            Get Quote
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Small Card - Site Mapping (1x1) -->
+                <div class="bento-card bento-small mapping scroll-animate">
+                    <div>
+                        <div class="service-icon-container" style="width: 48px; height: 48px;">
+                            <i class="fas fa-map-marked-alt" style="color: white; font-size: 1.3rem;"></i>
+                        </div>
+                        <h3 class="service-title" style="font-size: 1.2rem; margin-bottom: 0.8rem; color: #1f2937;">Site Mapping</h3>
+                        <p class="service-description" style="font-size: 0.9rem; color: #6b7280; margin-bottom: 1rem; line-height: 1.4;">Survey-grade aerial mapping for construction.</p>
+                        <div style="margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151; margin-bottom: 0.3rem;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>Survey-grade accuracy</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151; margin-bottom: 0.3rem;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>3D modeling</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: #374151;">
+                                <div style="width: 5px; height: 5px; background: #10b981; border-radius: 50%;"></div>
+                                <span>GIS compatible</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="service-price" style="margin-bottom: 0.8rem; color: #f59e0b; font-weight: 700;">From $75</div>
+                        <button style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; border: none; padding: 0.7rem 1rem; border-radius: 10px; font-weight: 600; cursor: pointer; width: 100%; font-size: 0.9rem; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
+                            Survey
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">How It Works</h2>
+                <p class="section-subtitle scroll-animate">
+                    From booking to completion in just 4 simple steps. Transparent, fast, and secure.
+                </p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item scroll-animate">
+                    <div class="timeline-number">1</div>
+                    <div class="timeline-content">
+                        <h3>Browse & Compare</h3>
+                        <p>Search services in your area, compare providers by price, ETA, ratings, and reviews. See transparent pricing upfront.</p>
+                    </div>
+                </div>
+                <div class="timeline-item scroll-animate">
+                    <div class="timeline-number">2</div>
+                    <div class="timeline-content">
+                        <h3>Book Instantly</h3>
+                        <p>Request or instant book with clear pricing and ETAs. Add special instructions and choose your preferred time.</p>
+                    </div>
+                </div>
+                <div class="timeline-item scroll-animate">
+                    <div class="timeline-number">3</div>
+                    <div class="timeline-content">
+                        <h3>Track Live</h3>
+                        <p>Get real-time updates, live location tracking, and mission status. Stay informed every step of the way.</p>
+                    </div>
+                </div>
+                <div class="timeline-item scroll-animate">
+                    <div class="timeline-number">4</div>
+                    <div class="timeline-content">
+                        <h3>Rate & Repeat</h3>
+                        <p>Review your experience and rebook favorites with one tap. Build relationships with trusted providers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="features-content">
+                <div class="section-header">
+                    <h2 class="section-title scroll-animate" style="color: white;">Why Choose SkyMarket</h2>
+                    <p class="section-subtitle scroll-animate" style="color: rgba(255, 255, 255, 0.8);">
+                        Built for transparency, safety, and convenience. Experience the future of local services.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3 class="service-title">Open Choice</h3>
+                        <p>Compare multiple providers side-by-side instead of being locked into single fleets. Choose what works best for you.</p>
+                    </div>
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-eye feature-icon"></i>
+                        <h3 class="service-title">Transparent Pricing</h3>
+                        <p>See all-in prices and ETAs upfront. No hidden fees, no surprises, ever.</p>
+                    </div>
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-shield-alt feature-icon"></i>
+                        <h3 class="service-title">Vetted Providers</h3>
+                        <p>All providers verified with background checks, licenses, insurance, and safety training.</p>
+                    </div>
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-clock feature-icon"></i>
+                        <h3 class="service-title">Real-time Tracking</h3>
+                        <p>Live location updates and mission status for complete peace of mind.</p>
+                    </div>
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-plane feature-icon"></i>
+                        <h3 class="service-title">Multi-Modal</h3>
+                        <p>Ground couriers AND licensed drone operators in one unified platform.</p>
+                    </div>
+                    <div class="feature-card scroll-animate">
+                        <i class="fas fa-lock feature-icon"></i>
+                        <h3 class="service-title">Safe & Secure</h3>
+                        <p>Escrow payments, insurance coverage, and comprehensive safety standards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title scroll-animate">What Our Users Say</h2>
+                <p class="section-subtitle scroll-animate">
+                    Join thousands of satisfied users who've transformed how they get things done.
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-quote">
+                        "SkyMarket changed how I run my restaurant. Instead of dealing with multiple delivery apps, I can compare providers and choose the best option every time. The transparent pricing is a game-changer."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MS</div>
+                        <div class="author-info">
+                            <h4>Maya Singh</h4>
+                            <p>Restaurant Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-quote">
+                        "As a drone operator, SkyMarket has been incredible. I get steady, well-paying jobs without the marketing hassle. The built-in compliance tools make everything seamless."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <h4>John Davis</h4>
+                            <p>Licensed Drone Pilot</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card scroll-animate">
+                    <div class="testimonial-quote">
+                        "I needed aerial shots for my property listing and found a licensed pilot within minutes. The whole process was smooth and professional. Highly recommend!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SL</div>
+                        <div class="author-info">
+                            <h4>Sarah Lee</h4>
+                            <p>Real Estate Agent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Stats -->
+    <section class="stats">
+        <div class="container">
+            <h2 class="section-title scroll-animate" style="color: white;">By the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item scroll-animate">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">On-time Completion</span>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <span class="stat-number">2min</span>
+                    <span class="stat-label">Average Response</span>
+                </div>
+                <div class="stat-item scroll-animate">
+                    <span class="stat-number">60s</span>
+                    <span class="stat-label">Average Booking</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced CTA -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title scroll-animate">Ready to Transform Your Delivery Experience?</h2>
+                <p class="cta-subtitle scroll-animate">
+                    Join thousands of people and businesses who've already discovered the smarter way to get things done.
+                </p>
+                <div class="cta-buttons scroll-animate">
+                    <a href="#" class="btn-cta-primary">
+                        <span>Get Started Free</span>
+                        <i class="fas fa-rocket"></i>
+                    </a>
+                    <a href="#" class="btn-cta-secondary">
+                        <span>Watch Demo</span>
+                        <i class="fas fa-play"></i>
+                    </a>
+                </div>
+                <p style="margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">
+                    Available on Web, iOS, and Android • No subscription required • Start in 60 seconds
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <a href="#services">Food Delivery</a><br>
+                    <a href="#services">Courier Services</a><br>
+                    <a href="#services">Aerial Imaging</a><br>
+                    <a href="#services">Site Mapping</a>
+                </div>
+                <div class="footer-section">
+                    <h4>For Providers</h4>
+                    <a href="#">Become a Provider</a><br>
+                    <a href="#">Driver Requirements</a><br>
+                    <a href="#">Pilot Certification</a><br>
+                    <a href="#">Earnings Calculator</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a><br>
+                    <a href="#">Safety Standards</a><br>
+                    <a href="#">Contact Support</a><br>
+                    <a href="#">Community Guidelines</a>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <a href="#">Our Story</a><br>
+                    <a href="#">Careers</a><br>
+                    <a href="#">Press Kit</a><br>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.7; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;">
+                © 2025 SkyMarket. Built for the Michigan Mobility AI Hackathon. Making local services accessible to everyone.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Enhanced JavaScript
+        
+        // Loading animation
+        window.addEventListener('load', () => {
+            const loading = document.getElementById('loading');
+            loading.classList.add('hidden');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Interactive elements
+        document.querySelectorAll('.service-card, .feature-card, .bento-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (this.classList.contains('bento-card')) {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                } else {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Dynamic stats counter
+        const statsNumbers = document.querySelectorAll('.stat-number');
+        const countUp = (element, target) => {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = element.textContent.includes('+') ? target + '+' : target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : '');
+                }
+            }, 20);
+        };
+
+        // Initialize counters when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const numbers = entry.target.querySelectorAll('.stat-number');
+                    numbers.forEach(num => {
+                        const target = parseInt(num.textContent.replace(/[^\d]/g, ''));
+                        countUp(num, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+    </script>
+</body>
+</html>

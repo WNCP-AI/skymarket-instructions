@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyMarket - Get Anything Delivered or Captured</title>
+    <meta name="description" content="The easiest way to get food delivered, parcels couriered, or aerial imagery captured. Compare vetted providers with transparent pricing and real-time ETAs.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary: #f59e0b;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-description {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .food-delivery { color: #ef4444; }
+        .courier { color: #3b82f6; }
+        .aerial { color: #10b981; }
+        .mapping { color: #f59e0b; }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: var(--light);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 0;
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 0;
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid, .services-grid, .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <div class="logo">SkyMarket</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#" class="cta-button">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="fade-in-up">Get Anything Delivered or Captured</h1>
+                <p class="hero-subtitle fade-in-up">
+                    The easiest way to get food delivered, parcels couriered, or aerial imagery captured. 
+                    Compare vetted providers with transparent pricing and real-time ETAs.
+                </p>
+                <div class="hero-buttons fade-in-up">
+                    <a href="#services" class="btn-primary">Start Browsing</a>
+                    <a href="#how-it-works" class="btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">What You Can Do</h2>
+            <div class="services-grid">
+                <div class="service-card scroll-reveal">
+                    <i class="fas fa-utensils service-icon food-delivery"></i>
+                    <h3>Food Delivery</h3>
+                    <p>Get meals from local restaurants delivered fast with real-time tracking and transparent pricing.</p>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <i class="fas fa-shipping-fast service-icon courier"></i>
+                    <h3>Courier Services</h3>
+                    <p>Send documents, packages, and small parcels across town with trusted local couriers.</p>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <i class="fas fa-camera service-icon aerial"></i>
+                    <h3>Aerial Imaging</h3>
+                    <p>Professional drone photography and videography for real estate, events, and marketing.</p>
+                </div>
+                <div class="service-card scroll-reveal">
+                    <i class="fas fa-map-marked-alt service-icon mapping"></i>
+                    <h3>Site Mapping</h3>
+                    <p>Detailed aerial surveys and mapping for construction, inspections, and site analysis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">1</div>
+                    <h3>Browse & Compare</h3>
+                    <p>Search services, compare providers by price, ETA, and ratings</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">2</div>
+                    <h3>Book Instantly</h3>
+                    <p>Request or instant book with transparent pricing and clear ETAs</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">3</div>
+                    <h3>Track Live</h3>
+                    <p>Get real-time updates, live tracking, and mission status</p>
+                </div>
+                <div class="step-card scroll-reveal">
+                    <div class="step-number">4</div>
+                    <h3>Rate & Repeat</h3>
+                    <p>Review your experience and rebook favorites with one tap</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Why Choose SkyMarket</h2>
+            <div class="features-grid">
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3 class="feature-title">Open Choice</h3>
+                    <p class="feature-description">Compare multiple providers side-by-side instead of being locked into single fleets</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-eye feature-icon"></i>
+                    <h3 class="feature-title">Transparent Pricing</h3>
+                    <p class="feature-description">See all-in prices and ETAs upfront - no hidden fees or surprises</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-shield-alt feature-icon"></i>
+                    <h3 class="feature-title">Vetted Providers</h3>
+                    <p class="feature-description">All providers verified with background checks, licenses, and insurance</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-clock feature-icon"></i>
+                    <h3 class="feature-title">Real-time Tracking</h3>
+                    <p class="feature-description">Live location updates and mission status for complete peace of mind</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-plane feature-icon"></i>
+                    <h3 class="feature-title">Multi-Modal</h3>
+                    <p class="feature-description">Ground couriers AND licensed drone operators in one unified platform</p>
+                </div>
+                <div class="feature-card scroll-reveal">
+                    <i class="fas fa-lock feature-icon"></i>
+                    <h3 class="feature-title">Safe & Secure</h3>
+                    <p class="feature-description">Escrow payments, insurance coverage, and comprehensive safety standards</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item scroll-reveal">
+                    <h3>95%</h3>
+                    <p>On-time completion rate</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>2min</h3>
+                    <p>Average provider response</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>90%</h3>
+                    <p>Service availability rate</p>
+                </div>
+                <div class="stat-item scroll-reveal">
+                    <h3>60s</h3>
+                    <p>Average booking time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="scroll-reveal">Ready to Experience the Future?</h2>
+                <p class="scroll-reveal" style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                    Join thousands of people and businesses already using SkyMarket for 
+                    reliable, transparent, and flexible delivery and aerial services.
+                </p>
+                <a href="#" class="btn-primary scroll-reveal" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">
+                    Get Started Now
+                </a>
+                <p class="scroll-reveal" style="margin-top: 1rem; opacity: 0.7;">
+                    Available on web, iOS, and Android • No subscription required
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 SkyMarket. The future of local delivery and aerial services.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">
+                Built for the Michigan Mobility AI Hackathon • Making local services accessible to everyone
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effects to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
