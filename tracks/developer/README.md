@@ -34,7 +34,7 @@ A full-stack drone service marketplace for the Detroit Metro area featuring:
 - Familiarity with component-based architecture
 - Basic understanding of databases and APIs
 
-## Track Structure - 21 Steps
+## Track Structure - 15 Steps
 
 ### Phase 1: Foundation Setup (Steps 1-6)
 1. **Intro** - Project overview and objectives
@@ -44,30 +44,22 @@ A full-stack drone service marketplace for the Detroit Metro area featuring:
 5. **Cursor Overview & Basics** - Models, settings, context usage
 6. **GitHub Import** - Repository access and import
 
-### Phase 2: Project Orientation (Steps 7-9)
-7. **Repo Orientation** - Navigate docs, instructions, prompts
-8. **Create Your Styling Docs** - Establish design system
-9. **Landing Page and Supporting Pages** - Build core pages with styling
+### Phase 2: Backend Setup (Steps 7-9)
+7. **Supabase Overview** - Understanding Supabase services
+8. **Supabase Setup** - Create project and configure database
+9. **App to Supabase Connection** - Connect application to backend
 
-### Phase 3: Database & Authentication (Steps 10-12)
-10. **Supabase Overview** - Understanding Supabase services
-11. **Connecting Supabase for Authentication and Data** - Setup auth and database
-12. **Dashboards for Consumer and Provider** - Role-based dashboard views
+### Phase 3: Deployment & Tools (Steps 10-12)
+10. **Vercel Basics** - Understanding deployment model
+11. **Vercel Environment** - Environment variable configuration
+12. **MCP Context7** - Advanced development assistance
 
-### Phase 4: Core Functionality (Steps 13-16)
-13. **CRUD for Listing, Booking** - Basic data operations
-14. **Deploy: Vercel Basics** - Understanding deployment model
-15. **Vercel Env** - Environment variable configuration
-16. **MCP: Context7** - Advanced development assistance
+### Phase 4: Payment & Communication (Steps 13-14)
+13. **Stripe Checkout** - Payment integration and webhooks
+14. **Resend Email** - Email notifications setup
 
-### Phase 5: Payment Integration (Steps 17-19)
-17. **Stripe Overview** - Payment system architecture
-18. **Stripe Basic Flow** - Checkout modal and webhook setup
-19. **Create Orders Flow and CRUD** - Order management with advanced UI
-
-### Phase 6: Final Integration (Steps 20-21)
-20. **Resend Email** - Email notifications after payment
-21. **Ship to Vercel** - Final deployment with all integrations
+### Phase 5: Core Features (Step 15)
+15. **Booking System** - Complete booking implementation
 
 ## Expected Outcome
 

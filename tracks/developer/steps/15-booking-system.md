@@ -1,4 +1,4 @@
-# Step 16 - Booking System Implementation
+# Step 15 - Booking System Implementation
 
 > **Build the core booking system that allows consumers to book services and providers to manage orders**
 
