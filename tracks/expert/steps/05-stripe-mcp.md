@@ -370,14 +370,14 @@ With advanced Stripe MCP integration mastered:
 ## References
 
 ### Essential Documentation
-- [Stripe MCP Server](https://github.com/stripe/mcp-server) - Official Stripe MCP integration
-- [Stripe API Reference](https://stripe.com/docs/api) - Complete API documentation
-- [PCI Compliance Guide](https://stripe.com/docs/security) - Security and compliance requirements
+- [Stripe MCP Server](https://github.com/stripe/mcp-server) - Official Stripe MCP integration (reference for setup patterns. use context7)
+- [Stripe API Reference](https://stripe.com/docs/api) - Complete API documentation (reference for API patterns. use context7)
+- [PCI Compliance Guide](https://stripe.com/docs/security) - Security and compliance requirements (reference for security patterns. use context7)
 
 ### Advanced Topics
-- [Payment Analytics](https://stripe.com/docs/reports) - Revenue and payment analysis
-- [Webhook Security](https://stripe.com/docs/webhooks/signatures) - Secure webhook handling
-- [Marketplace Payments](https://stripe.com/docs/connect) - Multi-party payment flows
+- [Payment Analytics](https://stripe.com/docs/reports) - Revenue and payment analysis (reference for analytics patterns. use context7)
+- [Webhook Security](https://stripe.com/docs/webhooks/signatures) - Secure webhook handling (reference for security patterns. use context7)
+- [Marketplace Payments](https://stripe.com/docs/connect) - Multi-party payment flows (reference for Connect patterns. use context7)
 
 ---
 

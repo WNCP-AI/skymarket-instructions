@@ -1,320 +1,394 @@
-# Step 2: Environment Setup - Development Environment Preparation
+# Step 2: Environment Setup
 
-**Objective**: Set up your complete development environment with all necessary tools and verify everything is working correctly.
+## Objective
 
-## Overview
+Set up all necessary accounts, tools, and environment variables required for spec-driven development of the SkyMarket application.
 
-Before we start coding, we need to ensure your development environment is properly configured. This includes Node.js, Git, and verifying all account access.
+## Prerequisites Check
 
-## Node.js Setup
+Before proceeding, ensure you have:
+- ✅ Computer with macOS, Windows, or Linux
+- ✅ At least 8GB RAM (16GB recommended)
+- ✅ 10GB free disk space
+- ✅ Stable internet connection
+- ✅ Basic command line familiarity
 
-### Verify Node.js Installation
+## Required Accounts
 
+You'll need to create free accounts for the following services. We'll use these throughout the tutorial.
+
+### 1. GitHub Account
+**Purpose**: Code repository and version control
+
+**Setup**:
+1. Visit [github.com](https://github.com)
+2. Click "Sign up"
+3. Create account with your email
+4. Verify your email address
+
+**Verification**:
+- [ ] Can log into GitHub
+- [ ] Email verified
+- [ ] Profile created
+
+### 2. Supabase Account
+**Purpose**: Database, authentication, and real-time features
+
+**Setup**:
+1. Visit [supabase.com](https://supabase.com)
+2. Click "Start your project"
+3. Sign up with GitHub (recommended) or email
+4. No credit card required for free tier
+
+**Verification**:
+- [ ] Can access Supabase dashboard
+- [ ] Account linked to GitHub (if applicable)
+
+### 3. Stripe Account
+**Purpose**: Payment processing and marketplace payments
+
+**Setup**:
+1. Visit [stripe.com](https://stripe.com)
+2. Click "Sign up"
+3. Create account with email
+4. Complete basic information (test mode is fine)
+5. Skip bank account setup for now (development only)
+
+**Verification**:
+- [ ] Can access Stripe dashboard
+- [ ] Test mode enabled
+- [ ] API keys visible in dashboard
+
+### 4. Vercel Account
+**Purpose**: Application deployment and hosting
+
+**Setup**:
+1. Visit [vercel.com](https://vercel.com)
+2. Click "Sign up"
+3. Sign up with GitHub (recommended)
+4. Authorize Vercel to access your GitHub
+
+**Verification**:
+- [ ] Can access Vercel dashboard
+- [ ] GitHub integration connected
+
+### 5. Resend Account
+**Purpose**: Transactional email service
+
+**Setup**:
+1. Visit [resend.com](https://resend.com)
+2. Click "Sign up"
+3. Create account with email
+4. Verify your email address
+5. Free tier includes 100 emails/day
+
+**Verification**:
+- [ ] Can access Resend dashboard
+- [ ] Email verified
+- [ ] API key available
+
+### 6. Mapbox Account
+**Purpose**: Interactive maps and location services
+
+**Setup**:
+1. Visit [mapbox.com](https://mapbox.com)
+2. Click "Sign up"
+3. Create account with email
+4. Free tier includes 50,000 map loads/month
+
+**Verification**:
+- [ ] Can access Mapbox Studio
+- [ ] Default public token visible
+
+### 7. OpenAI Account (Optional)
+**Purpose**: AI features and chatbot functionality
+
+**Setup**:
+1. Visit [platform.openai.com](https://platform.openai.com)
+2. Sign up or sign in
+3. Navigate to API keys section
+4. Free credits available for new accounts
+
+**Verification**:
+- [ ] Can access API keys page
+- [ ] Credits or billing set up
+
+## Development Tools
+
+### 1. Node.js and npm
+**Purpose**: JavaScript runtime and package manager
+
+**Installation**:
+
+**macOS** (using Homebrew):
 ```bash
-# Check Node.js version (should be 18+)
-node --version
+# Install Homebrew if not installed
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-# Check npm version
-npm --version
+# Install Node.js
+brew install node
 ```
 
-### Install or Update Node.js (if needed)
-
-**Option 1: Using Node Version Manager (Recommended)**
+**Windows** (using Chocolatey):
 ```bash
-# Install nvm (if not already installed)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# Install Chocolatey if not installed (run as Administrator)
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
-# Restart terminal or run:
-source ~/.bashrc
-
-# Install and use Node.js 18
-nvm install 18
-nvm use 18
-nvm alias default 18
+# Install Node.js
+choco install nodejs
 ```
 
-**Option 2: Direct Download**
-- Visit [nodejs.org](https://nodejs.org) and download LTS version
-- Install and verify with the commands above
-
-## Git Configuration
-
-### Verify Git Installation
+**Linux** (Ubuntu/Debian):
 ```bash
-git --version
+# Using NodeSource repository
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
-### Configure Git (if not already done)
+**Verification**:
+```bash
+node --version  # Should show v18.0.0 or higher
+npm --version   # Should show 9.0.0 or higher
+```
+
+### 2. Git
+**Purpose**: Version control
+
+**Installation**:
+
+**macOS**:
+```bash
+brew install git
+```
+
+**Windows**:
+```bash
+choco install git
+```
+
+**Linux**:
+```bash
+sudo apt-get install git
+```
+
+**Configuration**:
 ```bash
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
-
-# Verify configuration
-git config --global --list
 ```
 
-## Development Directory Setup
-
-### Create Project Directory
+**Verification**:
 ```bash
-# Navigate to your preferred development location
-cd ~/Development  # or wherever you keep projects
-
-# Create a directory for hackathon projects
-mkdir skymarket-hackathon
-cd skymarket-hackathon
+git --version  # Should show 2.0.0 or higher
 ```
 
-## Account Verification
+### 3. VS Code (Backup Editor)
+**Purpose**: Code editor as backup to Cursor
 
-### GitHub Account
-1. Visit [github.com](https://github.com) and ensure you're logged in
-2. Verify you can create repositories
-3. Set up SSH keys (optional but recommended):
+**Installation**:
+1. Visit [code.visualstudio.com](https://code.visualstudio.com)
+2. Download for your operating system
+3. Install following the installer prompts
 
+**Verification**:
+- [ ] VS Code opens successfully
+- [ ] Can create a new file
+
+## Project Setup
+
+### 1. Create Project Directory
 ```bash
-# Generate SSH key (if you don't have one)
-ssh-keygen -t ed25519 -C "your.email@example.com"
-
-# Add to SSH agent
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-
-# Copy public key to add to GitHub
-cat ~/.ssh/id_ed25519.pub
-# Add this to GitHub Settings > SSH Keys
+# Create a workspace directory
+mkdir -p ~/projects/skymarket
+cd ~/projects/skymarket
 ```
 
-### Cursor IDE Setup
-1. Download and install from [cursor.so](https://cursor.so)
-2. Sign in with your account
-3. Verify AI features are working:
-   - Open Cursor
-   - Press `Cmd+L` (Mac) or `Ctrl+L` (Windows/Linux)
-   - Type a simple question and verify you get a response
-
-### Supabase Account
-1. Visit [supabase.com](https://supabase.com) and sign in
-2. Verify you can access the dashboard
-3. **Don't create a project yet** - we'll do this in Step 10
-
-### Stripe Account
-1. Visit [stripe.com](https://stripe.com) and sign in
-2. Ensure you're in **Test Mode** (toggle in the left sidebar)
-3. Navigate to Developers > API Keys
-4. Verify you can see test keys (we'll use these later)
-
-### Vercel Account
-1. Visit [vercel.com](https://vercel.com) and sign in
-2. Connect your GitHub account if not already connected
-3. Verify you can see the dashboard
-
-### Resend Account
-1. Visit [resend.com](https://resend.com) and sign in
-2. Navigate to API Keys
-3. Verify you can access the dashboard
-
-## Terminal/Command Line Setup
-
-### Verify Terminal Access
-**On macOS:**
-- Open Terminal app or iTerm2
-- Verify you can run basic commands
-
-**On Windows:**
-- Use PowerShell or Windows Terminal
-- Consider installing Windows Subsystem for Linux (WSL2) for better compatibility
-
-**On Linux:**
-- Use your preferred terminal emulator
-
-### Install Useful Command Line Tools
-
-**jq (for JSON processing):**
+### 2. Clone the Repository
 ```bash
-# macOS with Homebrew
-brew install jq
-
-# Ubuntu/Debian
-sudo apt-get install jq
-
-# Windows with Chocolatey
-choco install jq
-
-# Verify installation
-echo '{"test": "value"}' | jq .
+# Clone the SkyMarket repository
+git clone https://github.com/your-org/skymarket-supabase.git
+cd skymarket-supabase
 ```
 
-**curl (usually pre-installed):**
+**Note**: If repository doesn't exist yet, we'll create it in Step 7.
+
+### 3. Environment Variables Template
+Create a `.env.local` file template (we'll fill this in later):
+
 ```bash
-curl --version
+# Create environment file
+touch .env.local
 ```
 
-## Environment Verification Script
+Add this template:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 
-Create and run this verification script to ensure everything is set up correctly:
+# Stripe
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_webhook_secret
+
+# Resend
+RESEND_API_KEY=your_resend_api_key
+
+# OpenAI (Optional)
+OPENAI_API_KEY=your_openai_api_key
+
+# Mapbox
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+
+# App Configuration
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_SERVICE_AREA_CENTER_LAT=42.3314
+NEXT_PUBLIC_SERVICE_AREA_CENTER_LNG=-83.0458
+NEXT_PUBLIC_SERVICE_AREA_RADIUS_MILES=25
+```
+
+## System Requirements Verification
+
+### Check Your Setup
+Run this verification script:
 
 ```bash
-# Create verification script
+# Create a setup verification script
 cat > verify-setup.sh << 'EOF'
 #!/bin/bash
 
-echo "🔍 Verifying Development Environment Setup"
-echo "=========================================="
+echo "🔍 Verifying Development Environment..."
+echo ""
 
-# Node.js check
-echo -n "Node.js: "
-if command -v node >/dev/null 2>&1; then
-    node_version=$(node --version)
-    if [[ "$node_version" =~ v1[89]|v[2-9][0-9] ]]; then
-        echo "✅ $node_version (good)"
-    else
-        echo "⚠️  $node_version (should be v18+)"
-    fi
+# Check Node.js
+if command -v node &> /dev/null; then
+    echo "✅ Node.js: $(node --version)"
 else
-    echo "❌ Not installed"
+    echo "❌ Node.js: Not installed"
 fi
 
-# npm check
-echo -n "npm: "
-if command -v npm >/dev/null 2>&1; then
-    echo "✅ $(npm --version)"
+# Check npm
+if command -v npm &> /dev/null; then
+    echo "✅ npm: $(npm --version)"
 else
-    echo "❌ Not installed"
+    echo "❌ npm: Not installed"
 fi
 
-# Git check
-echo -n "Git: "
-if command -v git >/dev/null 2>&1; then
-    echo "✅ $(git --version)"
+# Check Git
+if command -v git &> /dev/null; then
+    echo "✅ Git: $(git --version)"
 else
-    echo "❌ Not installed"
+    echo "❌ Git: Not installed"
 fi
 
-# curl check
-echo -n "curl: "
-if command -v curl >/dev/null 2>&1; then
-    echo "✅ Available"
+# Check for .env.local
+if [ -f .env.local ]; then
+    echo "✅ .env.local: File exists"
 else
-    echo "❌ Not installed"
-fi
-
-# jq check (optional)
-echo -n "jq: "
-if command -v jq >/dev/null 2>&1; then
-    echo "✅ Available"
-else
-    echo "⚠️  Not installed (optional)"
+    echo "⚠️  .env.local: Not found (will create later)"
 fi
 
 echo ""
-echo "🎯 Summary:"
-echo "If you see all ✅ checks (jq is optional), you're ready to proceed!"
-echo "If you see ❌ or ⚠️  for required tools, please install them first."
+echo "📋 Account Checklist:"
+echo "   [ ] GitHub account created"
+echo "   [ ] Supabase account created"
+echo "   [ ] Stripe account created"
+echo "   [ ] Vercel account created"
+echo "   [ ] Resend account created"
+echo "   [ ] Mapbox account created"
+echo "   [ ] OpenAI account (optional)"
 EOF
 
-# Make executable and run
+# Make it executable and run
 chmod +x verify-setup.sh
 ./verify-setup.sh
 ```
 
-## Development Tools Setup
-
-### Package Manager Configuration
-
-**Set npm registry (optional optimization):**
-```bash
-# Use faster npm registry (optional)
-npm config set registry https://registry.npmjs.org/
-
-# Verify configuration
-npm config get registry
-```
-
-### Global Package Installation
-
-Install useful global packages:
-```bash
-# TypeScript compiler (optional, projects usually include this)
-npm install -g typescript
-
-# Vercel CLI (useful for deployment later)
-npm install -g vercel
-
-# Verify installations
-tsc --version
-vercel --version
-```
-
-## Troubleshooting
-
-### Node.js Issues
-
-**"node: command not found"**
-- Reinstall Node.js from [nodejs.org](https://nodejs.org)
-- Restart your terminal
-- Check your PATH variable
-
-**Old Node.js version**
-- Use nvm to install a newer version
-- Or download latest LTS from nodejs.org
-
-### Git Issues
-
-**"git: command not found"**
-- Install Git from [git-scm.com](https://git-scm.com)
-- On macOS, install Xcode command line tools: `xcode-select --install`
-
-### Permission Issues
-
-**npm permission errors**
-```bash
-# Fix npm permissions (macOS/Linux)
-mkdir ~/.npm-global
-npm config set prefix '~/.npm-global'
-echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.profile
-source ~/.profile
-```
-
-### Account Access Issues
-
-**Can't access accounts**
-- Verify internet connection
-- Try incognito/private browsing mode
-- Clear browser cache and cookies
-- Check if accounts require email verification
-
 ## Expected Outcome
 
 After completing this step, you should have:
-
-### Working Environment
-- [ ] Node.js 18+ installed and working
-- [ ] npm package manager available
+- [ ] All required accounts created and verified
+- [ ] Node.js and npm installed (v18+)
 - [ ] Git installed and configured
-- [ ] Terminal/command line access
+- [ ] Project directory created
+- [ ] Environment variables template ready
+- [ ] VS Code installed as backup editor
 
-### Account Access
-- [ ] GitHub account accessible
-- [ ] Cursor IDE installed and signed in
-- [ ] Supabase account accessible
-- [ ] Stripe account in test mode
-- [ ] Vercel account connected to GitHub
-- [ ] Resend account accessible
+## Troubleshooting Tips
 
-### Verification
-- [ ] All environment checks pass ✅
-- [ ] Can run npm commands
-- [ ] Can run git commands
-- [ ] All accounts accessible
+### Account Creation Issues
+
+**Problem**: Email verification not received
+**Solution**: Check spam folder, request resend, try different email
+
+**Problem**: GitHub authorization fails with Vercel/Supabase
+**Solution**: Check GitHub settings → Applications → Revoke and re-authorize
+
+### Installation Issues
+
+**Problem**: Permission denied during installation
+**Solution**: Use `sudo` for Linux/macOS, run as Administrator on Windows
+
+**Problem**: Old Node.js version installed
+**Solution**: Uninstall existing version, use nvm for version management:
+```bash
+# Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+# Install latest Node
+nvm install node
+nvm use node
+```
+
+### Environment Issues
+
+**Problem**: Command not found after installation
+**Solution**: Restart terminal or refresh PATH:
+```bash
+# macOS/Linux
+source ~/.bashrc  # or ~/.zshrc
+
+# Windows
+# Restart PowerShell/Command Prompt
+```
+
+## Pro Tips
+
+### API Key Management
+- **Never commit** `.env.local` to Git
+- **Keep keys secure** - treat them like passwords
+- **Use test keys** during development
+- **Rotate keys** if accidentally exposed
+
+### Account Organization
+- **Use consistent email** across services when possible
+- **Enable 2FA** on GitHub and payment services
+- **Document API keys** in a password manager
+- **Set up billing alerts** even for free tiers
+
+### Development Environment
+- **Use a dedicated browser profile** for development
+- **Install browser extensions**: React DevTools, Redux DevTools
+- **Set up terminal aliases** for common commands
+- **Keep dependencies updated** regularly
 
 ## Next Steps
 
-Great! Your development environment is ready. Next, we'll explore the project specifications and understand what we're building.
+Excellent! Your development environment is ready. Next, we'll install Cursor IDE and set it up for spec-driven development.
+
+### What's Coming in Step 3
+- Download and install Cursor IDE
+- Configure Cursor for optimal performance
+- Set up Claude AI integration
+- Prepare for MCP Context7 installation
 
 ---
 
-**Previous Step**: [Step 1: Intro](./01-intro.md) | **Next Step**: [Step 3: Definition Documents](./03-definition-documents.md)
+**Next Step**: [Step 3: Cursor IDE Installation](./03-cursor-install.md) →
 
-**Having issues?** Check the troubleshooting section above or review the [Prerequisites](../prerequisites.md) page.
+**Quick Links**:
+- [Previous: Introduction](./01-intro.md)
+- [Track Overview](../README.md)
+- [Project Specifications](../../../specs/)

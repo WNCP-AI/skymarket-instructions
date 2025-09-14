@@ -1,596 +1,574 @@
-# Expert Step 03: AI-Powered UI Components & User Experience
+# Step 3: AI Elements & Chat Interface - Real Implementation Analysis
 
-## Objective
-Design and implement sophisticated AI-powered user interface components that enhance the SkyMarket experience with intelligent, context-aware interactions. Build production-ready chat interfaces, AI-assisted forms, and intelligent recommendations.
+## What You'll Accomplish
 
-## What You'll Master
-- Advanced AI-powered UI patterns and components
-- Real-time streaming interfaces with optimal UX
-- Context-aware AI assistance throughout the user journey
-- Performance-optimized AI interactions
-- Enterprise-grade conversation management
+Analyze and enhance SkyMarket's AI Elements implementation, understanding production chat interface patterns and building advanced conversational experiences for marketplace operations.
+
+**Key Outcomes**:
+- Deep understanding of AI Elements component architecture in production
+- Enhanced chat interface with advanced streaming and tool result displays
+- Marketplace-specific UI patterns for AI-powered service discovery
+- Production-ready chat persistence and performance optimization
 
 ## Prerequisites
-- Completed Expert Steps 01-02 (OpenAI API and AI SDK)
-- Advanced React/Next.js component architecture knowledge
-- Experience with real-time UI patterns
-- Understanding of conversation design principles
 
-## Advanced AI UX Architecture
+Before starting, ensure you have:
+- Completed [Step 2: AI SDK Integration and Implementation](./02-ai-sdk-integration.md)
+- Understanding of React hooks and client component patterns
+- Familiarity with Next.js dynamic imports and code splitting
+- Experience with TypeScript interfaces and component composition
 
-### Intelligent Interface Patterns
+## Specification References
+
+This step analyzes and enhances patterns described in:
+- **AI Elements Documentation**: [Message Components](https://raw.githubusercontent.com/vercel/ai-elements/refs/heads/main/README.md)
+- **useChat Hook**: [AI SDK UI Chatbot](https://ai-sdk.dev/docs/ai-sdk-ui/chatbot)
+- **Streaming UI**: [Streaming User Interfaces](https://ai-sdk.dev/docs/ai-sdk-ui/streaming)
+- **AI Specification**: `docs/specs/ai/AI.md` - Chat interface requirements
+- **Existing Implementation**: `components/chat/*` and `components/ai-elements/*`
+
+## Understanding AI Elements Package
+
+### What is AI Elements?
+
+AI Elements is Vercel's React component library designed to accelerate AI application development, built on top of shadcn/ui. It provides pre-built, customizable components specifically designed for AI interfaces.
+
+**Cursor Prompt for AI Elements Setup:**
 ```
-AI Chat Interface ←→ Smart Forms ←→ Contextual Suggestions
-       ↑                              ↓
-Voice Input ←→ AI Assistance ←→ Predictive Actions
-```
+Set up AI Elements in the SkyMarket project following the official installation guide:
 
-**Enterprise UX Principles:**
-1. **Progressive Enhancement:** AI features enhance, never replace, core functionality
-2. **Context Preservation:** Maintain conversation context across sessions
-3. **Performance First:** Sub-second response times with streaming
-4. **Accessibility:** Screen reader compatible, keyboard navigation
-5. **Privacy by Design:** User control over AI data and interactions
+INSTALLATION REQUIREMENTS:
+1. Install AI Elements package:
+   - Use npx ai-elements@latest for direct installation
+   - Or npx shadcn@latest add https://registry.ai-sdk.dev/all.json (reference this registry URL for AI Elements patterns. use context7)
+   - Ensure compatibility with existing shadcn/ui setup
 
-## Instructions
+2. Verify prerequisites:
+   - Node.js 18+ (check current version)
+   - Next.js project (already configured)
+   - AI SDK installed (@ai-sdk/react, ai packages)
+   - Tailwind CSS configured (already set up)
 
-### 1. Advanced Chat Interface Implementation
+3. Core component integration:
+   - Conversation: Main container for chat messages
+   - Message: Individual message wrapper with role-based styling
+   - Response: Content formatting and rendering
+   - Code blocks and reasoning displays for tool results
 
-**Cursor Prompt:**
-```
-Create a production-grade AI chat system for SkyMarket with these components:
+4. Integration with existing patterns:
+   - Work with current useChat() hook implementation
+   - Maintain existing localStorage persistence
+   - Follow current component structure in components/ai-elements/
 
-1. Advanced chat interface at components/ai/ChatInterface.tsx:
-   - Real-time streaming with token-by-token display
-   - Message history persistence and context management
-   - Rich message types (text, structured data, actions)
-   - Typing indicators and loading states
-   - Error recovery and retry mechanisms
-   - Accessibility features (ARIA labels, keyboard nav)
-   - Mobile-responsive design
+REFERENCE SPECIFICATIONS:
+- AI Elements README at https://raw.githubusercontent.com/vercel/ai-elements/refs/heads/main/README.md (reference for implementation patterns. use context7)
+- Existing implementation: components/ai-elements/*
+- Current chat patterns: components/chat/*
 
-2. Conversation management at lib/ai/conversation.ts:
-   - Session management and context preservation
-   - Message threading and organization
-   - Context summarization for long conversations
-   - User preference learning and adaptation
-   - Conversation analytics and insights
-
-3. AI-powered components:
-   - Smart search with query suggestions
-   - Intelligent form completion and validation
-   - Contextual help and guidance
-   - Personalized recommendations
-
-Use modern React patterns (hooks, suspense) and ensure type safety throughout.
-```
-
-### 2. Context-Aware AI Assistance
-
-**Cursor Prompt:**
-```
-Implement intelligent, context-aware assistance throughout SkyMarket:
-
-1. Service discovery assistant:
-   - Natural language service search
-   - Requirement gathering through conversation
-   - Provider matching based on needs
-   - Pricing optimization suggestions
-
-2. Booking flow assistance:
-   - Intelligent form completion
-   - Schedule optimization recommendations
-   - Weather and regulatory guidance
-   - Cost estimation and alternatives
-
-3. Provider onboarding assistant:
-   - Service listing optimization
-   - Pricing strategy recommendations
-   - Profile completion guidance
-   - Best practice suggestions
-
-4. Customer support integration:
-   - Automated issue resolution
-   - Escalation to human support
-   - FAQ and documentation search
-   - Ticket routing and prioritization
+Show me the complete setup with component examples and integration patterns.
 ```
 
-### 3. Performance & UX Optimization
+### Core AI Elements Components
 
-**Cursor Prompt:**
-```
-Optimize AI interface performance and user experience:
+**Component Architecture from AI Elements:**
+```tsx
+// Basic AI Elements pattern
+import { useChat } from '@ai-sdk/react';
+import { Conversation, Message, Response } from '@/components/ai-elements';
 
-1. Streaming optimization:
-   - Chunked response processing
-   - Partial rendering for immediate feedback
-   - Progressive enhancement of responses
-   - Intelligent prefetching and caching
-
-2. Error handling and recovery:
-   - Graceful degradation when AI unavailable
-   - Retry mechanisms with exponential backoff
-   - Fallback to non-AI alternatives
-   - User-friendly error messaging
-
-3. Mobile and accessibility:
-   - Touch-optimized interactions
-   - Voice input integration
-   - Screen reader compatibility
-   - High contrast and large text support
-
-4. Performance monitoring:
-   - Response time tracking
-   - User engagement analytics
-   - A/B testing framework for AI features
-   - Conversion rate optimization
-```
-
-## Code Examples
-
-### Advanced Chat Interface
-
-```typescript
-// components/ai/ChatInterface.tsx
-'use client'
-
-import { useState, useRef, useEffect } from 'react'
-import { useChat } from 'ai/react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { ConversationManager } from '@/lib/ai/conversation'
-
-interface ChatInterfaceProps {
-  userId?: string
-  context?: 'general' | 'booking' | 'provider' | 'support'
-  initialMessages?: Message[]
-  onConversationEnd?: (summary: string) => void
-}
-
-export function ChatInterface({
-  userId,
-  context = 'general',
-  initialMessages = [],
-  onConversationEnd
-}: ChatInterfaceProps) {
-  const conversationManager = useRef(new ConversationManager(userId))
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [suggestions, setSuggestions] = useState<string[]>([])
-  
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    isLoading,
-    error,
-    stop,
-    reload
-  } = useChat({
-    api: '/api/ai/chat',
-    initialMessages,
-    body: {
-      userId,
-      context,
-      conversationId: conversationManager.current.getId()
-    },
-    onResponse: (response) => {
-      // Handle streaming response
-      conversationManager.current.updateContext(response)
-    },
-    onFinish: async (message) => {
-      // Save conversation and generate suggestions
-      await conversationManager.current.addMessage(message)
-      const newSuggestions = await conversationManager.current.generateSuggestions()
-      setSuggestions(newSuggestions)
-    },
-    onError: (error) => {
-      console.error('Chat error:', error)
-      // Implement retry logic
-    }
-  })
-
-  // Auto-scroll to bottom on new messages
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
-
-  // Voice input integration
-  const [isListening, setIsListening] = useState(false)
-  const startVoiceInput = () => {
-    // Implement voice input logic
-    setIsListening(true)
-  }
-
+export default function Chat() {
+  const { messages } = useChat();
   return (
-    <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
-      {/* Chat Header */}
-      <div className="flex items-center justify-between p-4 border-b">
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-          <h3 className="font-semibold">SkyMarket Assistant</h3>
-        </div>
-        <div className="flex space-x-2">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={startVoiceInput}
-            disabled={isListening || isLoading}
-          >
-            {isListening ? '🎤 Listening...' : '🎤'}
-          </Button>
-          {isLoading && (
-            <Button variant="ghost" size="sm" onClick={stop}>
-              Stop
-            </Button>
-          )}
-        </div>
-      </div>
+    <Conversation>
+      {messages.map((message) => (
+        <Message key={message.id} from={message.role}>
+          <Response>{message.content}</Response>
+        </Message>
+      ))}
+    </Conversation>
+  );
+}
+```
 
-      {/* Messages Area */}
-      <ScrollArea className="flex-1 p-4">
-        <div className="space-y-4">
-          {messages.map((message) => (
-            <ChatMessage
-              key={message.id}
-              message={message}
-              isStreaming={isLoading && message === messages[messages.length - 1]}
-            />
-          ))}
-          
-          {/* Typing Indicator */}
-          {isLoading && (
-            <div className="flex items-center space-x-2 text-gray-500">
-              <div className="flex space-x-1">
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-              </div>
-              <span className="text-sm">Assistant is typing...</span>
-            </div>
-          )}
-          
-          <div ref={messagesEndRef} />
-        </div>
-      </ScrollArea>
+**Key AI Elements Benefits:**
+1. **Consistent UI**: Pre-built components with proper accessibility
+2. **shadcn/ui Integration**: Works seamlessly with existing design system
+3. **Customizable**: Full control over styling and behavior
+4. **AI-Optimized**: Built specifically for AI application patterns
+5. **Tool Result Support**: Structured display for AI tool outputs
 
-      {/* Quick Suggestions */}
-      {suggestions.length > 0 && (
-        <div className="px-4 py-2 border-t bg-gray-50">
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((suggestion, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  handleInputChange({ target: { value: suggestion } } as any)
-                  handleSubmit()
-                }}
-                className="text-xs"
-              >
-                {suggestion}
-              </Button>
-            ))}
-          </div>
-        </div>
-      )}
+### Available AI Elements Components
 
-      {/* Input Area */}
-      <form onSubmit={handleSubmit} className="p-4 border-t">
-        <div className="flex space-x-2">
-          <Input
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Ask about drone services, booking, or anything else..."
-            disabled={isLoading}
-            className="flex-1"
-            aria-label="Chat message input"
-          />
-          <Button 
-            type="submit" 
-            disabled={isLoading || !input.trim()}
-            aria-label="Send message"
-          >
-            {isLoading ? '⏸️' : '➤'}
-          </Button>
-        </div>
-        
-        {error && (
-          <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-sm text-red-600">
-            {error.message}
-            <Button variant="ghost" size="sm" onClick={reload} className="ml-2">
-              Retry
-            </Button>
-          </div>
-        )}
-      </form>
+**Cursor Prompt for Component Exploration:**
+```
+Explore the complete AI Elements component library and plan integration for SkyMarket:
+
+COMPONENT INVENTORY:
+1. Core conversation components:
+   - Conversation: Main container with scrolling and accessibility
+   - Message: Individual message wrapper with role-based styling
+   - Response: Content formatting and rendering engine
+
+2. Specialized display components:
+   - Code blocks: For displaying code snippets and technical content
+   - Reasoning displays: For showing AI thinking processes
+   - Source attribution: For citing data sources and references
+   - Loading states: Skeleton screens and progress indicators
+
+3. Interactive elements:
+   - Action buttons: Quick actions and follow-up suggestions
+   - Input components: Enhanced text inputs and form controls
+   - Navigation elements: Conversation history and threading
+
+MARKETPLACE APPLICATIONS:
+- Service search results display with structured cards
+- Pricing breakdowns with interactive elements
+- Booking confirmations with action buttons
+- Provider information with verification badges
+- Error states and fallback messaging
+
+INSTALLATION AND SETUP:
+- Prerequisites verification (Node.js 18+, Next.js, AI SDK)
+- shadcn/ui compatibility with existing components
+- Tailwind CSS integration patterns
+- TypeScript type definitions and interfaces
+
+REFERENCE DOCUMENTATION:
+- AI Elements README at https://raw.githubusercontent.com/vercel/ai-elements/refs/heads/main/README.md (reference for patterns. use context7)
+- Registry URL at https://registry.ai-sdk.dev/all.json (reference for installation patterns. use context7)
+- Integration examples and best practices
+
+Show me complete component catalog with SkyMarket-specific use cases and implementation examples.
+```
+
+**Component Applications for Marketplaces:**
+```tsx
+// Service Search Results Display
+<Conversation>
+  <Message from="assistant">
+    <Response>
+      I found 3 drone delivery services in your area:
+      <ServiceResultsDisplay services={toolResult.services} />
+    </Response>
+  </Message>
+</Conversation>
+
+// Price Breakdown with Interactive Elements
+<Message from="assistant">
+  <Response>
+    <PriceBreakdownCard
+      basePrice={50}
+      platformFee={7.50}
+      total={57.50}
+      onBookNow={() => startBookingFlow()}
+    />
+  </Response>
+</Message>
+
+// Provider Verification Display
+<Message from="assistant">
+  <Response>
+    <ProviderCard
+      name="Detroit Drone Delivery"
+      rating={4.8}
+      verified={true}
+      completedJobs={156}
+      responseTime="2 hours"
+    />
+  </Response>
+</Message>
+```
+
+## SkyMarket AI Elements Implementation Analysis
+
+### How SkyMarket Uses AI Elements
+
+**Current Architecture:**
+```
+ChatLauncher (Fixed positioning + state)
+     ↓
+ChatWindow (useChat hook + UI state)
+     ↓
+AI Elements Components
+├── Conversation (Scrolling container)
+├── Message (Role-based styling)
+└── Response (Content formatting)
+```
+
+**Cursor Prompt for AI Elements Analysis:**
+```
+Analyze how SkyMarket currently uses AI Elements components and identify enhancement opportunities:
+
+CURRENT IMPLEMENTATION ANALYSIS:
+1. Examine components/ai-elements/* directory:
+   - Which AI Elements components are currently implemented?
+   - How do they integrate with the existing chat system?
+   - What customizations have been made to the default AI Elements?
+
+2. Component usage patterns:
+   - How does ChatWindow use Conversation, Message, Response?
+   - What props and styling customizations are applied?
+   - How does the manual streaming integrate with AI Elements?
+
+3. Integration with SkyMarket design system:
+   - How do AI Elements work with existing Tailwind classes?
+   - What shadcn/ui components are leveraged?
+   - How is the Detroit/marketplace branding applied?
+
+4. Identify enhancement opportunities:
+   - Missing AI Elements components that could improve UX
+   - Tool result display patterns for marketplace data
+   - Advanced features like code blocks, reasoning displays
+   - Accessibility and responsive design improvements
+
+REFERENCE SPECIFICATIONS:
+- AI Elements documentation for available components
+- Current implementation in components/ai-elements/
+- Chat integration patterns in components/chat/ChatWindow.tsx
+
+Show me the analysis with specific improvement recommendations and implementation patterns.
+```
+
+### AI Elements Component Deep Dive
+
+**Cursor Prompt for Advanced AI Elements Usage:**
+```
+Implement advanced AI Elements patterns for SkyMarket's marketplace needs:
+
+ADVANCED COMPONENT USAGE:
+1. Enhanced Message components:
+   - Role-based styling for user, assistant, system messages
+   - Avatar integration for marketplace branding
+   - Timestamp and status indicators
+   - Message actions (copy, share, bookmark)
+
+2. Tool result display components:
+   - ServiceCard components for search results
+   - PriceBreakdown displays for cost estimates
+   - AvailabilityCalendar for booking slots
+   - MapView for service area visualization
+
+3. Conversation enhancements:
+   - Message grouping and threading
+   - Conversation search and filtering
+   - Export and sharing functionality
+   - Quick action suggestions
+
+4. Advanced Response patterns:
+   - Streaming text with typing indicators
+   - Structured data display (tables, cards)
+   - Interactive elements (buttons, forms)
+   - Rich media support (images, maps)
+
+MARKETPLACE INTEGRATION:
+- Service category-specific message styling
+- Detroit Metro area context in responses
+- Provider verification badges and ratings
+- Booking flow integration with chat interface
+
+REFERENCE PATTERNS:
+- AI Elements README at https://raw.githubusercontent.com/vercel/ai-elements/refs/heads/main/README.md (reference for advanced patterns. use context7)
+- Tool calling examples from Step 2 AI SDK Integration
+- Existing marketplace UI patterns in components/
+
+Show me complete enhanced AI Elements implementation with marketplace-specific features.
+```
+
+**Real Implementation Patterns:**
+1. **Dynamic Loading:** ChatWindow loaded on-demand to reduce bundle size
+2. **Local Persistence:** localStorage for chat history across sessions
+3. **Streaming UI:** Real-time text streaming with manual fetch implementation
+4. **Component Composition:** AI Elements provide consistent chat UI
+5. **State Management:** useState for simple client-side state
+
+## Component Implementation Deep Dive
+
+### 1. ChatLauncher Component Analysis
+
+**Key Patterns Observed:**
+```typescript
+// Dynamic import for code splitting
+const ChatWindow = dynamic(() => import('./ChatWindow').then(m => m.ChatWindow), { ssr: false })
+
+// Simple state management for UI visibility
+const [open, setOpen] = useState(false)
+
+// Fixed positioning with responsive sizing
+className="fixed bottom-4 right-4 z-50"
+className="h-[480px] w-[360px] ... lg:h-[560px] lg:w-[400px]"
+```
+
+**Expert Insights:**
+- **Performance:** Dynamic import prevents loading chat until needed
+- **UX:** Fixed positioning ensures accessibility from any page
+- **Responsive:** Different sizes for mobile vs desktop
+- **Accessibility:** Proper ARIA labels and semantic HTML
+
+### 2. ChatWindow Implementation Analysis
+
+**Real useChat() Integration:**
+```typescript
+// AI SDK React integration
+const chat = useChat({ id: sessionId })
+const messages: UIMessage[] = chat.messages
+const setMessages = chat.setMessages
+
+// Manual streaming implementation (interesting choice!)
+const res = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ messages: base }),
+  signal: ac.signal,
+})
+```
+
+**Advanced Patterns:**
+- **Session Management:** Random session IDs for chat isolation
+- **Persistence:** localStorage integration with error handling
+- **Streaming:** Manual ReadableStream processing for control
+- **Abort Control:** AbortController for request cancellation
+- **State Synchronization:** Real-time message state updates
+
+### 3. AI Elements Component Architecture
+
+**Conversation Component:**
+```typescript
+// Advanced scrolling behavior with use-stick-to-bottom
+import { StickToBottom, useStickToBottomContext } from 'use-stick-to-bottom'
+
+export const Conversation = ({ className, ...props }: ConversationProps) => (
+  <StickToBottom
+    className={cn('relative flex-1 overflow-y-auto', className)}
+    initial="smooth"
+    resize="smooth"
+    role="log"  // Accessibility: screen reader support
+    {...props}
+  />
+)
+```
+
+**Message Component Patterns:**
+- **Role-based Styling:** Different appearance for user vs assistant
+- **Avatar Integration:** Bot/User icons with proper fallbacks
+- **Responsive Layout:** Max width constraints and flex layouts
+- **Accessibility:** Semantic HTML structure with proper roles
+
+## Expert-Level Cursor Prompts for Chat Enhancement
+
+### Enhanced Streaming Implementation
+
+**Cursor Prompt for API Enhancement:**
+```typescript
+/**
+ * @cursor-prompt: Enhance the existing chat API with these improvements:
+ *
+ * 1. Replace manual streaming with streamText() from Vercel AI SDK
+ * 2. Add tool calling for SkyMarket operations:
+ *    - searchServices(category, location) -> Supabase query
+ *    - getServicePrice(serviceId, requirements) -> pricing calculation
+ *    - checkAvailability(providerId, date) -> calendar lookup
+ * 3. Implement request validation with Zod schemas
+ * 4. Add usage analytics to Supabase for tracking
+ * 5. Maintain existing business context loading pattern
+ * 6. Keep the business-focused system prompt approach
+ *
+ * Base on the current app/api/chat/route.ts implementation
+ */
+```
+
+**Result Pattern:**
+```typescript
+// Enhanced version would use streamText() instead of generateText()
+const result = streamText({
+  model: openai('gpt-4o-mini'),
+  system: systemPrompt + docsContext,
+  messages: convertToCoreMessages(messages),
+  tools: {
+    searchServices: tool({
+      description: 'Search for drone services in Detroit Metro',
+      parameters: z.object({
+        category: z.enum(['food_delivery', 'courier', 'aerial_imaging', 'site_mapping']),
+        location: z.string(),
+      }),
+      execute: async ({ category, location }) => {
+        // Query Supabase services table
+        const supabase = createServerClient()
+        const { data } = await supabase
+          .from('services')
+          .select('*')
+          .eq('category', category)
+          .ilike('location', `%${location}%`)
+        return { services: data || [] }
+      },
+    }),
+  },
+})
+
+return result.toDataStreamResponse()
+```
+
+### Chat UI Enhancement Opportunities
+
+**Current Implementation Strengths:**
+- Manual streaming gives full control over the experience
+- localStorage persistence works reliably across sessions
+- AI Elements provide consistent, polished UI
+- Proper error handling and loading states
+
+**Enhancement Opportunities:**
+```typescript
+/**
+ * @cursor-prompt: Add these UX improvements to ChatWindow:
+ *
+ * 1. Typing indicators during streaming
+ * 2. Message timestamps and read receipts
+ * 3. Rich message formatting (markdown support via Streamdown)
+ * 4. Quick action buttons for common queries
+ * 5. Chat history search and filtering
+ * 6. Export chat functionality
+ * 7. Voice message support using Web Speech API
+ * 8. Message reactions and feedback
+ *
+ * Maintain the existing useChat() integration pattern
+ */
+```
+
+**Tool Integration UI:**
+```typescript
+// When tools are called, show structured results
+if (message.toolInvocations) {
+  return (
+    <div className="space-y-2">
+      {message.toolInvocations.map((tool, i) => (
+        <ServiceCard key={i} service={tool.result} />
+      ))}
     </div>
   )
 }
-
-// Individual message component
-function ChatMessage({ message, isStreaming }: { message: any, isStreaming: boolean }) {
-  const isUser = message.role === 'user'
-  
-  return (
-    <div className={`flex ${
-      isUser ? 'justify-end' : 'justify-start'
-    }`}>
-      <div className={`max-w-[80%] rounded-lg px-4 py-2 ${
-        isUser
-          ? 'bg-blue-500 text-white'
-          : 'bg-gray-100 text-gray-900'
-      }`}>
-        <div className="prose prose-sm max-w-none">
-          {message.content}
-          {isStreaming && (
-            <span className="animate-pulse">▋</span>
-          )}
-        </div>
-        
-        {/* Message actions */}
-        {!isUser && (
-          <div className="flex justify-end mt-2 space-x-1">
-            <Button variant="ghost" size="xs">
-              👍
-            </Button>
-            <Button variant="ghost" size="xs">
-              👎
-            </Button>
-            <Button variant="ghost" size="xs">
-              📋
-            </Button>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
 ```
 
-### Smart Service Discovery Component
+### Advanced AI SDK Integration Examples
 
+**Streaming with useChat() Hook:**
 ```typescript
-// components/ai/SmartServiceDiscovery.tsx
-'use client'
+// Alternative to manual streaming - using built-in hook
+const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  api: '/api/chat',
+  onResponse: (response) => {
+    // Handle streaming response
+    console.log('Streaming response received')
+  },
+  onFinish: (message) => {
+    // Save to localStorage or analytics
+    logChatMessage(message)
+  },
+  onError: (error) => {
+    // Handle errors gracefully
+    showErrorToast(error.message)
+  },
+})
+```
 
-import { useState, useCallback, useEffect } from 'react'
-import { useDebounce } from '@/hooks/useDebounce'
-import { Input } from '@/components/ui/input'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-
-export function SmartServiceDiscovery() {
-  const [query, setQuery] = useState('')
-  const [suggestions, setSuggestions] = useState<string[]>([])
-  const [results, setResults] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [context, setContext] = useState<any>({})
-  
-  const debouncedQuery = useDebounce(query, 300)
-
-  // Generate intelligent search suggestions
-  const generateSuggestions = useCallback(async (input: string) => {
-    if (input.length < 3) return
-    
-    try {
-      const response = await fetch('/api/ai/suggestions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: input, context: 'service-search' })
-      })
-      
-      const data = await response.json()
-      setSuggestions(data.suggestions || [])
-    } catch (error) {
-      console.error('Suggestion generation failed:', error)
-    }
-  }, [])
-
-  // Semantic search with AI enhancement
-  const performSearch = useCallback(async (searchQuery: string) => {
-    setIsLoading(true)
-    
-    try {
-      const response = await fetch('/api/ai/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: searchQuery,
-          context: context,
-          includeMetadata: true
-        })
-      })
-      
-      const data = await response.json()
-      setResults(data.results || [])
-      
-      // Update context based on search results
-      setContext(prev => ({
-        ...prev,
-        lastSearch: searchQuery,
-        resultCount: data.results?.length || 0,
-        categories: data.categories || []
-      }))
-    } catch (error) {
-      console.error('Search failed:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }, [context])
-
-  // Trigger search when debounced query changes
-  useEffect(() => {
-    if (debouncedQuery) {
-      generateSuggestions(debouncedQuery)
-      performSearch(debouncedQuery)
-    } else {
-      setSuggestions([])
-      setResults([])
-    }
-  }, [debouncedQuery, generateSuggestions, performSearch])
-
-  return (
-    <div className="space-y-6">
-      {/* Smart Search Input */}
-      <div className="relative">
-        <Input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Describe what you need (e.g., 'aerial photos of construction site tomorrow')"
-          className="pr-12"
-        />
-        
-        {isLoading && (
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full" />
-          </div>
-        )}
-      </div>
-
-      {/* AI-Generated Suggestions */}
-      {suggestions.length > 0 && (
-        <div className="space-y-2">
-          <h3 className="text-sm font-medium text-gray-700">Suggestions:</h3>
-          <div className="flex flex-wrap gap-2">
-            {suggestions.map((suggestion, index) => (
-              <Button
-                key={index}
-                variant="outline"
-                size="sm"
-                onClick={() => setQuery(suggestion)}
-                className="text-xs"
-              >
-                {suggestion}
-              </Button>
-            ))}
-          </div>
+**Tool Results UI Pattern:**
+```typescript
+// Display tool results in chat messages
+function ToolResult({ tool }: { tool: ToolInvocation }) {
+  if (tool.toolName === 'searchServices') {
+    return (
+      <div className="bg-blue-50 rounded-lg p-3 space-y-2">
+        <div className="text-sm font-medium text-blue-900">
+          Found {tool.result.services.length} services
         </div>
-      )}
-
-      {/* Enhanced Search Results */}
-      <div className="space-y-4">
-        {results.map((result, index) => (
-          <Card key={result.id} className="p-4">
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <h3 className="font-semibold text-lg">{result.title}</h3>
-                <p className="text-gray-600 mt-1">{result.description}</p>
-                
-                {/* AI-Enhanced Metadata */}
-                <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                  <span>📍 {result.location}</span>
-                  <span>⭐ {result.rating}/5</span>
-                  <span>💰 ${result.price}</span>
-                  <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs">
-                    {Math.round(result.relevanceScore * 100)}% match
-                  </span>
-                </div>
-                
-                {/* AI-Generated Insights */}
-                {result.aiInsights && (
-                  <div className="mt-3 p-3 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-800">
-                      💡 <strong>AI Insight:</strong> {result.aiInsights}
-                    </p>
-                  </div>
-                )}
-              </div>
-              
-              <div className="flex flex-col space-y-2">
-                <Button size="sm">
-                  View Details
-                </Button>
-                <Button size="sm" variant="outline">
-                  Quick Book
-                </Button>
-              </div>
-            </div>
-          </Card>
+        {tool.result.services.map((service: any) => (
+          <ServiceCard key={service.id} service={service} />
         ))}
       </div>
-    </div>
-  )
+    )
+  }
+
+  return <div className="text-xs text-gray-500">Tool: {tool.toolName}</div>
 }
 ```
 
-## Expected Outcome
-
-After completing this step, you should have:
-
-✅ **Advanced AI Interfaces:**
-- Production-grade chat system with streaming
-- Context-aware assistance throughout user journey
-- Intelligent search and discovery components
-- Voice input and multimodal interactions
-
-✅ **Enterprise UX Patterns:**
-- Progressive enhancement with AI features
-- Accessibility-first design approach
-- Mobile-optimized responsive interfaces
-- Performance-optimized streaming and caching
-
-✅ **Intelligent User Experience:**
-- Personalized recommendations and suggestions
-- Context preservation across sessions
-- Proactive assistance and guidance
-- Error recovery and graceful degradation
-
-✅ **Production Readiness:**
-- Analytics and user engagement tracking
-- A/B testing framework for AI features
-- Performance monitoring and optimization
-- Security and privacy compliance
-
-## Advanced Patterns
-
-### Conversation Memory Management
-
+**Marketplace-Specific Prompt Engineering:**
 ```typescript
-class ConversationMemory {
-  private memory: Map<string, ConversationContext> = new Map()
-  
-  async summarizeContext(messages: Message[]): Promise<string> {
-    // Use AI to summarize long conversations
-    const summary = await this.aiService.generateSummary(messages)
-    return summary
+// Context-aware system prompts for different chat scenarios
+const getSystemPrompt = (context: 'booking' | 'support' | 'discovery') => {
+  const baseContext = `You are the SkyMarket AI assistant for Detroit's drone service marketplace.`
+
+  const contextPrompts = {
+    booking: `${baseContext} Help users book drone services by:
+    - Understanding their requirements (delivery, imaging, mapping)
+    - Checking service availability in their Detroit Metro location
+    - Explaining pricing and platform fees
+    - Guiding through the booking process`,
+
+    support: `${baseContext} Provide customer support by:
+    - Answering questions about orders and bookings
+    - Explaining platform policies and procedures
+    - Troubleshooting common issues
+    - Escalating complex problems`,
+
+    discovery: `${baseContext} Help users discover services by:
+    - Explaining the four service categories
+    - Recommending providers based on needs
+    - Comparing service options and pricing
+    - Highlighting highly-rated providers`
   }
-  
-  getRelevantContext(query: string): ConversationContext {
-    // Retrieve context relevant to current query
-    return this.memory.get(this.generateContextKey(query))
-  }
+
+  return contextPrompts[context]
 }
 ```
 
-### Adaptive AI Personalities
+## Expert Implementation Tasks
 
-```typescript
-class AIPersonalityManager {
-  getPersonality(context: string, userPreferences: any) {
-    // Adapt AI personality based on context and user preferences
-    return {
-      tone: context === 'support' ? 'helpful' : 'conversational',
-      expertise: this.inferExpertiseLevel(userPreferences),
-      communicationStyle: userPreferences.preferredStyle || 'balanced'
-    }
-  }
-}
-```
+### Analyze Current Architecture
+- [ ] Study the ChatLauncher dynamic loading pattern
+- [ ] Understand localStorage persistence implementation
+- [ ] Examine manual streaming vs useChat() hook tradeoffs
+- [ ] Review AI Elements component composition
+
+### Advanced Features to Implement
+- [ ] Upgrade to streamText() for better streaming UX
+- [ ] Add tool calling for service search and booking
+- [ ] Implement typed message interfaces with Zod
+- [ ] Create context-aware system prompts
+
+### UI Enhancement Opportunities
+- [ ] Add typing indicators and message timestamps
+- [ ] Implement quick action buttons for common queries
+- [ ] Create tool result display components
+- [ ] Add markdown support via Streamdown
+
+### Cursor Prompting Mastery
+- [ ] Practice context-aware prompt engineering
+- [ ] Use spec-driven component enhancement
+- [ ] Leverage AI Elements for consistent UI patterns
+- [ ] Implement marketplace-specific chat features
+
+## Key Insights from Real Implementation
+
+1. **Component Architecture**: AI Elements provide polished, accessible UI components
+2. **State Management**: Simple useState + localStorage works well for chat
+3. **Performance**: Dynamic imports prevent unnecessary bundle bloat
+4. **Streaming Control**: Manual streaming gives more control than built-in hooks
+5. **Business Focus**: Chat is scoped to marketplace operations, not general AI
+6. **User Experience**: Fixed positioning and responsive design ensure accessibility
+
+## Advanced AI SDK Opportunities
+
+**Current**: Simple text generation with business context
+**Enhanced**: Streaming + tools + structured responses
+**Enterprise**: Multi-modal + embeddings + analytics
 
 ## Next Steps
 
-With advanced AI UI components implemented:
-- **Step 04:** Implement advanced MCP tooling and automation
-- **Step 05:** Create comprehensive AI analytics and monitoring
-- **Step 06:** Build AI-powered business intelligence features
+Now that you understand the chat implementation, let's examine how AI Elements components work and explore advanced customization patterns.
 
 ---
 
-💡 **Expert Tip:** Focus on creating AI interfaces that feel natural and helpful, not gimmicky. The best AI UX is often invisible to users - it just makes their tasks easier and more efficient without drawing attention to the underlying technology.
+**Previous**: [Step 2: AI SDK Integration](./02-ai-sdk-integration.md) ← | → **Next**: [Step 4: AI Tools Implementation](./04-ai-tools.md)
+
+**Focus**: Marketplace intelligence with AI tool calling and service discovery
 
 

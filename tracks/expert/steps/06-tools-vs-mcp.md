@@ -540,14 +540,14 @@ With comprehensive AI SDK vs MCP decision framework mastered:
 ## References
 
 ### Essential Documentation
-- [Vercel AI SDK Tools](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling) - AI SDK tool integration patterns
-- [Model Context Protocol](https://modelcontextprotocol.io/) - MCP specification and best practices
-- [Enterprise Architecture](https://martinfowler.com/architecture/) - Architectural decision-making frameworks
+- [Vercel AI SDK Tools](https://sdk.vercel.ai/docs/ai-sdk-core/tools-and-tool-calling) - AI SDK tool integration patterns (reference for tool patterns. use context7)
+- [Model Context Protocol](https://modelcontextprotocol.io/) - MCP specification and best practices (reference for MCP patterns. use context7)
+- [Enterprise Architecture](https://martinfowler.com/architecture/) - Architectural decision-making frameworks (reference for architecture patterns. use context7)
 
 ### Advanced Topics
-- [Security Architecture](https://owasp.org/www-project-application-security-architecture/) - Security-first design patterns
-- [Performance Engineering](https://www.brendangregg.com/systems-performance-2nd-edition-book.html) - Performance optimization strategies
-- [Scalable Systems](https://github.com/donnemartin/system-design-primer) - System design patterns
+- [Security Architecture](https://owasp.org/www-project-application-security-architecture/) - Security-first design patterns (reference for security patterns. use context7)
+- [Performance Engineering](https://www.brendangregg.com/systems-performance-2nd-edition-book.html) - Performance optimization strategies (reference for performance patterns. use context7)
+- [Scalable Systems](https://github.com/donnemartin/system-design-primer) - System design patterns (reference for scalability patterns. use context7)
 
 ---
 

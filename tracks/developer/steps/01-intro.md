@@ -1,178 +1,318 @@
-# Step 1: Intro - Project Overview and Objectives
+# Step 1: Introduction to Spec-Driven Development
 
-**Objective**: Understand the SkyMarket project, its goals, and what you'll build during this hackathon.
+## Objective
 
-## What is SkyMarket?
+Understand spec-driven development methodology and how it transforms the way we build modern applications using AI assistance, official documentation, and comprehensive specifications.
 
-SkyMarket is a multi-modal marketplace for the Detroit Metro area that connects consumers with service providers offering:
+## What is Spec-Driven Development?
 
-- **Drone Services**: Aerial photography, site mapping, inspections
-- **Courier Services**: Package delivery, document transport
-- **Food Delivery**: Restaurant and grocery delivery
+Spec-driven development is a modern approach where you:
+1. **Start with comprehensive specifications** that define what to build
+2. **Load these specs into AI context** (Cursor IDE with Claude)
+3. **Access official library documentation** (MCP Context7)
+4. **Generate implementation code** that matches requirements
+5. **Verify against specifications** to ensure correctness
 
-### Key Features You'll Build
-- User authentication with consumer/provider roles
-- Service listing creation and management
-- Booking system with real-time status updates
-- Secure payment processing with Stripe
-- Email notifications
-- Modern, responsive UI
+### Traditional vs. Spec-Driven Development
 
-## Project Context
-
-### Target Market
-- **Location**: Detroit Metropolitan area
-- **Primary Users**: Consumers needing services, service providers (drone operators, couriers)
-- **Business Model**: Commission-based marketplace
-
-### Technical Goals
-- Build a production-ready application
-- Learn modern web development patterns
-- Understand full-stack development
-- Deploy to production on Vercel
-
-## Architecture Overview
-
+#### Traditional Approach
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │   Backend       │    │   Services      │
-│   Next.js 15    │────│   Supabase      │────│   Stripe        │
-│   React         │    │   PostgreSQL    │    │   Resend        │
-│   TypeScript    │    │   Auth          │    │   Vercel        │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+Vague Requirements → Manual Coding → Debug → Hope It Works
+```
+- Time-consuming manual implementation
+- Inconsistent patterns across codebase
+- Outdated practices from old tutorials
+- Lots of debugging and rework
+
+#### Spec-Driven Approach
+```
+Clear Specs → AI Context → Generate → Verify → Ship
+```
+- Fast implementation with AI assistance
+- Consistent patterns from specifications
+- Current best practices via Context7
+- Built-in verification against requirements
+
+## The Power of Specifications
+
+SkyMarket includes 13+ comprehensive specification documents covering:
+
+- **Business Logic**: Service categories, booking flows, pricing rules
+- **Technical Architecture**: Database schema, API endpoints, authentication
+- **Integrations**: Stripe payments, Mapbox maps, Resend emails
+- **User Experience**: Component patterns, form handling, real-time features
+
+These aren't just documentation - they're the blueprint for AI-assisted development.
+
+## The Three Pillars
+
+### 1. Project Specifications (`docs/specs/`)
+Your source of truth for what to build:
+- Business requirements and rules
+- Technical architecture decisions
+- API contracts and data models
+- Security and compliance needs
+
+### 2. MCP Context7 (Official Documentation)
+Real-time access to official library docs:
+- Current best practices
+- Framework-specific patterns
+- Version-aware examples
+- Migration guides
+
+### 3. AI Assistant (Cursor + Claude)
+Your implementation partner that:
+- Understands specifications
+- Generates correct code
+- Follows best practices
+- Maintains consistency
+
+## How Spec-Driven Development Works
+
+### Step 1: Load Context
+```
+# Load project specifications
+@docs/specs/authentication/AUTHENTICATION.md
+@docs/specs/architecture/DATABASE.md
+@AGENTS.md
 ```
 
-### Tech Stack Rationale
-- **Next.js 15**: Modern React framework with excellent DX
-- **Supabase**: PostgreSQL database with built-in auth and real-time features
-- **TypeScript**: Type safety for better development experience
-- **Stripe**: Industry-standard payment processing
-- **Vercel**: Seamless deployment and hosting
+### Step 2: Write Natural Language Prompts with Context7
+```
+@docs/specs/authentication/AUTHENTICATION.md
+@docs/specs/business-logic/BUSINESS-LOGIC.md
+@AGENTS.md
 
-## Learning Objectives
+Implement complete Supabase authentication system for SkyMarket drone marketplace:
+- Multi-role support (consumers, providers, admins) per business logic specification
+- Email/password signup with verification flow
+- Provider onboarding with role-specific dashboard routing
+- Session management with Next.js 15 App Router middleware
+- Row Level Security policies for marketplace data isolation
 
-By completing this track, you will:
+Integrate with current Supabase Auth patterns and Next.js 15 best practices.
 
-### Technical Skills
-- Master Next.js 15 App Router patterns
-- Implement secure authentication systems
-- Build real-time features with Supabase
-- Integrate payment processing with Stripe
-- Deploy production applications
+use context7
+```
 
-### Development Practices
-- Use modern development tools (Cursor IDE)
-- Write maintainable, typed code
-- Understand database design principles
-- Implement secure coding practices
-- Follow industry best practices
+### Step 3: Generate Implementation
+AI creates code that:
+- Matches specification requirements
+- Uses official library patterns
+- Follows project conventions
+- Includes proper error handling
 
-### Business Understanding
-- Understand marketplace business models
-- Learn about payment flow design
-- Understand user role management
-- Learn about service-based platforms
+### Step 4: Verify Against Specs
+```
+Verify this implementation:
+✓ Includes all auth methods from spec
+✓ Uses current Supabase patterns
+✓ Handles all error cases
+✓ Follows our TypeScript conventions
+```
 
-## Project Phases Overview
+## Real Example: Building Stripe Connect Marketplace
 
-### Phase 1: Foundation (Steps 1-6)
-Set up development environment and understand the project structure.
+Instead of manually implementing complex payment processing, you'll:
 
-### Phase 2: Project Setup (Steps 7-9)
-Navigate the codebase and create initial pages with styling.
+1. **Load marketplace specifications**:
+   ```
+   @docs/specs/payment/PAYMENT.md
+   @docs/specs/business-logic/BUSINESS-LOGIC.md
+   @docs/specs/authentication/AUTHENTICATION.md
+   @AGENTS.md
+   ```
 
-### Phase 3: Database & Auth (Steps 10-12)
-Set up Supabase, implement authentication, and create user dashboards.
+2. **Write comprehensive marketplace prompt**:
+   ```
+   Implement complete Stripe Connect marketplace payment system for SkyMarket drone services:
+   - Express account creation with KYC verification for providers
+   - Payment intent creation with 15% platform fee automation and escrow
+   - Webhook endpoints for payment events, account updates, payout notifications
+   - Consumer checkout flow with 3D Secure authentication
+   - Automatic fund release upon booking completion per business logic
 
-### Phase 4: Core Features (Steps 13-16)
-Build CRUD operations, set up deployment, and integrate development tools.
+   Integrate with Next.js 15 App Router, TypeScript, and Supabase database schema.
 
-### Phase 5: Payments (Steps 17-19)
-Integrate Stripe, create order management, and implement advanced UI features.
+   use context7
+   ```
 
-### Phase 6: Production (Steps 20-21)
-Add email notifications and complete production deployment.
+3. **Generate marketplace system**: AI creates production-ready payment infrastructure
+4. **Verify against marketplace specs**: Check fee calculations, escrow handling, webhook processing
 
-## Success Criteria
+**Time saved**: Days → Hours
+**Complexity handled**: Production-ready marketplace payments with escrow
+**Quality**: Enterprise-grade Stripe Connect integration
 
-You'll know you've succeeded when you have:
+## Why This Approach is Revolutionary
 
-### Functional Application
-- [ ] Users can register and authenticate
-- [ ] Providers can create service listings
-- [ ] Consumers can browse and book services
-- [ ] Payments process successfully
-- [ ] Email notifications send
-- [ ] Application is deployed and accessible
+### For Learning
+- **Understand before building**: Read specs to grasp requirements
+- **Learn best practices**: Context7 provides official patterns
+- **See the big picture**: Specs show how everything connects
+- **Build confidence**: Clear requirements reduce uncertainty
+
+### For Development Speed
+- **10x faster implementation**: AI generates boilerplate instantly
+- **Fewer bugs**: Specifications prevent misunderstandings
+- **Less refactoring**: Get it right the first time
+- **Rapid iteration**: Quick changes with clear context
+
+### For Code Quality
+- **Consistent patterns**: All code follows specifications
+- **Current best practices**: Context7 ensures modern approaches
+- **Production-ready**: Built-in error handling and edge cases
+- **Maintainable**: Clear structure from specifications
+
+## Project Overview: SkyMarket
+
+You'll build a complete drone service marketplace featuring:
+
+### Core Features
+- **Multi-role authentication** (consumers, providers, admins)
+- **Service marketplace** (4 categories: food, courier, aerial, mapping)
+- **Booking system** with scheduling and status tracking
+- **Payment processing** with Stripe Connect (15% platform fee)
+- **Real-time updates** via WebSocket subscriptions
+- **Email automation** for confirmations and notifications
+- **Interactive maps** with Detroit Metro geofencing
 
 ### Technical Implementation
-- [ ] Clean, typed codebase
-- [ ] Secure authentication
-- [ ] Proper error handling
-- [ ] Responsive design
-- [ ] Production-ready deployment
+- **Frontend**: Next.js 15.5.2 with React 19 and TypeScript 5
+- **Backend**: Supabase (PostgreSQL, Auth, Realtime)
+- **Styling**: Tailwind CSS 4 + shadcn/ui components
+- **Payments**: Stripe Connect marketplace
+- **Maps**: Mapbox GL JS
+- **Email**: Resend
+- **Deployment**: Vercel
 
-### Learning Outcomes
-- [ ] Confidence with Next.js and React
-- [ ] Understanding of full-stack development
-- [ ] Knowledge of authentication patterns
-- [ ] Experience with payment integration
-- [ ] Production deployment experience
+### Business Logic
+- **Geographic constraints**: Detroit Metro area only
+- **Service radius**: 25 miles from city center
+- **Compliance**: FAA Part 107 for drone operators
+- **Pricing**: Dynamic based on distance and complexity
+- **Escrow**: Payments held until service completion
 
 ## What Makes This Different
 
-### Real-World Focus
-- Based on actual marketplace patterns
-- Production-ready code and practices
-- Industry-standard tools and services
+### From Other Tutorials
+- **Not copy-paste**: You understand why you're building each feature
+- **Not outdated**: Always current via MCP Context7
+- **Not isolated**: Everything connects through specifications
+- **Not theoretical**: Build a real, deployable application
 
-### Guided Learning
-- Step-by-step instructions with explanations
-- Code examples with context
-- Troubleshooting guidance
-- Best practice explanations
+### From Manual Coding
+- **Faster**: Generate code in seconds, not hours
+- **Consistent**: Follows patterns throughout
+- **Reliable**: Based on proven specifications
+- **Educational**: Learn by understanding, not just doing
 
-### Modern Stack
-- Latest Next.js features
-- TypeScript throughout
-- Modern tooling (Cursor IDE)
-- Current industry patterns
+## Expected Outcomes
+
+By the end of this track, you will:
+
+### Technical Skills
+- ✅ Master Cursor IDE for AI-assisted development
+- ✅ Use MCP Context7 for official documentation
+- ✅ Build complex features from specifications
+- ✅ Implement authentication, payments, real-time features
+- ✅ Deploy production applications to Vercel
+
+### Development Practices
+- ✅ Read and understand technical specifications
+- ✅ Write effective AI prompts with context
+- ✅ Verify implementations against requirements
+- ✅ Apply consistent patterns across codebases
+- ✅ Use official documentation effectively
+
+### Soft Skills
+- ✅ Think in terms of specifications first
+- ✅ Communicate requirements clearly
+- ✅ Validate solutions systematically
+- ✅ Work efficiently with AI tools
+- ✅ Build with confidence from clear requirements
+
+## Your Learning Path
+
+### Phase 1: Foundation (Steps 1-6)
+Learn the tools and methodology:
+- Install and configure Cursor IDE
+- Set up MCP Context7 server
+- Master context management
+- Navigate specifications
+
+### Phase 2: Setup (Steps 7-9)
+Initialize the project:
+- Create Next.js application
+- Configure styling system
+- Build initial pages
+
+### Phase 3: Core Features (Steps 10-16)
+Implement main functionality:
+- Database and authentication
+- CRUD operations
+- Booking system
+- Real-time features
+
+### Phase 4: Advanced (Steps 17-21)
+Complete the marketplace:
+- Payment integration
+- Email automation
+- Production deployment
 
 ## Getting Started Mindset
 
-### Embrace Learning
-- Every step builds on the previous
-- Ask questions and experiment
-- Use the provided resources
-- Don't worry about perfection
+### Embrace the Methodology
+- **Trust the process**: Specifications guide you
+- **Use the tools**: AI and Context7 are your allies
+- **Verify often**: Check against specs regularly
+- **Ask for help**: Specifications have answers
 
 ### Focus on Understanding
-- Read the explanations, don't just copy code
-- Understand *why* we make certain choices
-- Learn the patterns, not just the syntax
-- Build confidence through practice
+- **Read specs first**: Understand before implementing
+- **Know the why**: Each feature has a purpose
+- **See connections**: How features work together
+- **Think production**: Build for real users
 
-### Practical Application
-- This is a real project you can extend
-- The patterns apply to other projects
-- The skills transfer to professional work
-- The deployment can be showcased
+## Prerequisites Check
 
-## Expected Time Investment
+Before continuing, ensure you have:
+- ✅ Basic understanding of React and Next.js
+- ✅ Familiarity with TypeScript
+- ✅ Willingness to learn new tools
+- ✅ 12-16 hours for the complete track
+- ✅ Excitement about AI-assisted development
 
-- **Total Time**: 12-16 hours
-- **Per Step**: 30-90 minutes average
-- **Flexibility**: Work at your own pace
-- **Support**: Detailed troubleshooting provided
+## Troubleshooting Tips
+
+### If Things Don't Make Sense
+- **Review the specification**: Requirements are documented
+- **Check Context7 docs**: Official patterns help
+- **Load more context**: Add related specs to Cursor
+- **Verify your understanding**: Re-read the objective
+
+### Common Misconceptions
+- **"AI will do everything"**: You guide and verify
+- **"Specs are just docs"**: They're your implementation guide
+- **"Context7 is optional"**: It ensures best practices
+- **"I need to memorize"**: Tools provide information as needed
 
 ## Next Steps
 
-Ready to begin? Let's set up your development environment and get you coding!
+Ready to set up your development environment? Let's get your tools configured for spec-driven development.
 
-**Prerequisites Check**: Before proceeding, ensure you've completed the [Prerequisites](../prerequisites.md) checklist.
+### What's Coming Next
+In Step 2, you'll:
+- Create necessary accounts (GitHub, Supabase, Stripe, etc.)
+- Set up your development environment
+- Prepare for Cursor IDE installation
+- Get ready for MCP Context7 setup
 
 ---
 
-**Next Step**: [Step 2: Environment Setup](./02-environment-setup.md)
+**Next Step**: [Step 2: Environment Setup](./02-environment-setup.md) →
 
-**Questions?** Review the project overview or check the [Resources](../resources.md) for additional context.
+**Quick Links**:
+- [Track Overview](../README.md)
+- [Prerequisites](../prerequisites.md)
+- [Project Specifications](../../../specs/)
