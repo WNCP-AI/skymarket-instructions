@@ -88,9 +88,9 @@ Follow the patterns in CLIENT-SERVER.md for server-first architecture and the se
 ```
 Using the authentication flows from AUTHENTICATION.md and Context7 Supabase patterns, create all authentication pages:
 
-1. Login page with email/password and social auth (GitHub, Google - configured but disabled)
+1. Login page with email/password only
 2. Signup page with email verification flow and profile creation
-3. Email confirmation page with resend functionality
+3. Email confirmation page with supabase functionality
 4. Password reset request and confirmation pages
 5. All with proper error handling, loading states, and user feedback
 
