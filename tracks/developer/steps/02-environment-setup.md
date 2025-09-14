@@ -205,14 +205,37 @@ mkdir -p ~/projects/skymarket
 cd ~/projects/skymarket
 ```
 
-### 2. Clone the Repository
+### 2. Fork and Clone Repositories
+
+Before cloning, fork both repositories into your GitHub account:
+
+- skymarket-instructions (these docs)
+- skymarket-supabase (app code)
+
+Then clone your forks into the workspace directory:
+
 ```bash
-# Clone the SkyMarket repository
-git clone https://github.com/your-org/skymarket-supabase.git
+# Clone docs (optional if you already have them open)
+git clone https://github.com/<your-username>/skymarket-instructions.git
+
+# Clone app code
+git clone https://github.com/<your-username>/skymarket-supabase.git
 cd skymarket-supabase
 ```
 
-**Note**: If repository doesn't exist yet, we'll create it in Step 7.
+Full code demo:
+
+```bash
+# Create workspace
+mkdir -p ~/projects/skymarket && cd ~/projects/skymarket
+
+# Fork both repos on GitHub first, then:
+git clone https://github.com/<your-username>/skymarket-instructions.git
+git clone https://github.com/<your-username>/skymarket-supabase.git
+cd skymarket-supabase
+```
+
+**Note**: Replace `<your-username>` with your GitHub username. If you use SSH, swap URLs accordingly (e.g., `git@github.com:<your-username>/skymarket-supabase.git`).
 
 ### 3. Environment Variables Template
 Create a `.env.local` file template (we'll fill this in later):
@@ -249,73 +272,6 @@ NEXT_PUBLIC_SERVICE_AREA_CENTER_LAT=42.3314
 NEXT_PUBLIC_SERVICE_AREA_CENTER_LNG=-83.0458
 NEXT_PUBLIC_SERVICE_AREA_RADIUS_MILES=25
 ```
-
-## System Requirements Verification
-
-### Check Your Setup
-Run this verification script:
-
-```bash
-# Create a setup verification script
-cat > verify-setup.sh << 'EOF'
-#!/bin/bash
-
-echo "🔍 Verifying Development Environment..."
-echo ""
-
-# Check Node.js
-if command -v node &> /dev/null; then
-    echo "✅ Node.js: $(node --version)"
-else
-    echo "❌ Node.js: Not installed"
-fi
-
-# Check npm
-if command -v npm &> /dev/null; then
-    echo "✅ npm: $(npm --version)"
-else
-    echo "❌ npm: Not installed"
-fi
-
-# Check Git
-if command -v git &> /dev/null; then
-    echo "✅ Git: $(git --version)"
-else
-    echo "❌ Git: Not installed"
-fi
-
-# Check for .env.local
-if [ -f .env.local ]; then
-    echo "✅ .env.local: File exists"
-else
-    echo "⚠️  .env.local: Not found (will create later)"
-fi
-
-echo ""
-echo "📋 Account Checklist:"
-echo "   [ ] GitHub account created"
-echo "   [ ] Supabase account created"
-echo "   [ ] Stripe account created"
-echo "   [ ] Vercel account created"
-echo "   [ ] Resend account created"
-echo "   [ ] Mapbox account created"
-echo "   [ ] OpenAI account (optional)"
-EOF
-
-# Make it executable and run
-chmod +x verify-setup.sh
-./verify-setup.sh
-```
-
-## Expected Outcome
-
-After completing this step, you should have:
-- [ ] All required accounts created and verified
-- [ ] Node.js and npm installed (v18+)
-- [ ] Git installed and configured
-- [ ] Project directory created
-- [ ] Environment variables template ready
-- [ ] VS Code installed as backup editor
 
 ## Troubleshooting Tips
 
