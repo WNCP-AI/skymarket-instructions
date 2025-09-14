@@ -35,7 +35,7 @@ docs/specs/
 ├── maps/
 │   └── MAPBOX.md              # Interactive mapping
 ├── payment/
-│   └── PAYMENT.md             # Stripe Connect marketplace
+│   └── PAYMENT.md             # Stripe payment processing
 ├── webhooks/
 │   └── WEBHOOKS.md             # Event handling patterns
 └── security/
@@ -84,10 +84,10 @@ docs/specs/
 - Social auth patterns
 
 **payment/PAYMENT.md**
-- Stripe Connect marketplace
-- Escrow and fee handling (15% platform fee)
+- Stripe payment processing
+- Secure transaction handling with variable pricing
 - Webhook management
-- Payout automation
+- Payment confirmation automation
 
 **realtime/REALTIME.md**
 - Supabase subscriptions
@@ -377,7 +377,7 @@ Show how user roles from the auth spec relate to service provider requirements i
 @docs/specs/api/WEBHOOKS.md
 @docs/specs/email/EMAIL.md
 
-Plan the implementation sequence for Stripe Connect integration, including webhook setup and email notifications.
+Plan the implementation sequence for Stripe payment integration, including webhook setup and email notifications.
 ```
 
 ## Expected Outcome

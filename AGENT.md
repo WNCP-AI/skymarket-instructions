@@ -27,7 +27,7 @@ This is the **SkyMarket Documentation Hub** - comprehensive specifications and l
     ├── email/                     # Resend integration
     ├── forms/                     # Form handling patterns
     ├── maps/                      # Mapbox integration
-    ├── payment/                   # Stripe Connect marketplace
+    ├── payment/                   # Stripe payment processing
     ├── realtime/                  # Supabase subscriptions
     ├── security/                  # Authentication & compliance
     └── webhooks/                  # Stripe webhook handling
@@ -49,7 +49,7 @@ tracks/
 
 - **Frontend**: Next.js 15.5.2, React 19, TypeScript 5, Tailwind CSS 4, shadcn/ui
 - **Backend**: Supabase (PostgreSQL, Auth, Storage, Realtime)
-- **Payments**: Stripe Connect marketplace with 15% platform fee
+- **Payments**: Stripe payment processing for services
 - **Maps**: Mapbox GL JS with Detroit Metro geofencing
 - **Email**: Resend for transactional emails
 - **AI Tools**: Cursor IDE, MCP Context7, OpenAI GPT-4o-mini
@@ -74,7 +74,7 @@ tracks/
 - Authentication & authorization system
 - Service listing management
 - End-to-end booking flow
-- Stripe Connect payment processing with escrow
+- Stripe payment processing with secure checkout
 - AI customer support (OpenAI GPT-4o-mini)
 - Real-time infrastructure
 - 8 implemented API endpoints
@@ -138,8 +138,8 @@ api/
 - **RLS Policies**: Database-level access control
 
 ### Payment Architecture
-- **Stripe Connect**: Express accounts for providers
-- **Escrow System**: Manual capture, 24-hour hold after completion
+- **Stripe Payments**: Secure checkout for services
+- **Payment Flow**: Direct payment processing
 - **Platform Fee**: 15% transaction fee
 - **Webhooks**: Comprehensive event handling
 

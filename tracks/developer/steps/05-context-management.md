@@ -95,7 +95,7 @@ use context7
 - Natural language only - no commands needed
 - Seamlessly integrates with project specifications
 - Always provides up-to-date library patterns and best practices
-- Perfect for complex marketplace implementations like Stripe Connect
+- Perfect for complex payment implementations like Stripe processing
 
 ### Effective Context7 Prompt Patterns
 
@@ -117,27 +117,27 @@ use context7
 @docs/specs/architecture/DATABASE.md
 @AGENTS.md
 
-Implement comprehensive Stripe Connect marketplace payment infrastructure for SkyMarket drone services:
+Implement comprehensive Stripe payment infrastructure for SkyMarket drone services:
 
 **Core Payment System Requirements:**
-1. Express account creation with comprehensive KYC verification for drone operators
-2. Payment intent creation with precise 15% platform fee calculation and escrow handling
-3. Webhook endpoints processing payment_intent.succeeded, account.updated, payout.paid events
-4. Consumer checkout flow with 3D Secure authentication and multiple payment methods
-5. Automatic fund release triggered by booking completion (status: completed)
+1. Secure payment processing with comprehensive verification for drone operators
+2. Payment intent creation with dynamic pricing calculation and secure handling
+3. Webhook endpoints processing payment_intent.succeeded and status update events
+4. Consumer checkout flow with secure authentication and multiple payment methods
+5. Automatic payment confirmation triggered by booking completion (status: completed)
 
 **Provider Integration Requirements:**
-6. Provider onboarding dashboard with verification status and requirements tracking
-7. Earnings analytics with payout history and tax reporting features
-8. Account capability management and compliance status monitoring
+6. Provider earnings dashboard with transaction history and status tracking
+7. Payment analytics with detailed transaction reporting features
+8. Transaction status management and monitoring capabilities
 
 **Business Logic Integration:**
 9. Geographic validation for Detroit Metro service area compliance
-10. Service category-specific handling for 4 drone service types
+10. Service category-specific pricing for 4 drone service types
 11. Integration with booking state machine and real-time status updates
 12. Database transaction handling for payment and booking status synchronization
 
-Use current Stripe Connect marketplace patterns, Next.js 15 App Router, and Supabase integration.
+Use current Stripe payment processing patterns, Next.js 15 App Router, and Supabase integration.
 
 use context7
 ```
@@ -261,13 +261,13 @@ use context7
 @docs/specs/business-logic/BUSINESS-LOGIC.md
 @AGENTS.md
 
-Create the core Stripe Connect marketplace payment system outlined in our specifications:
+Create the core Stripe payment processing system outlined in our specifications:
 - Express account creation for drone service providers
 - Payment intent creation with 15% platform fee structure
 - Basic webhook handling for payment events
 - Consumer checkout flow with escrow functionality
 
-Use Stripe Connect's current marketplace patterns for Next.js 15 App Router.
+Use Stripe's current payment patterns for Next.js 15 App Router.
 
 use context7
 ```
@@ -281,7 +281,7 @@ Enhance the payment system with the advanced features from our specifications:
 4. Comprehensive webhook event processing (account updates, payout events)
 5. Error handling for failed payments and retry logic
 
-Implement current Stripe Connect best practices for marketplace complexity.
+Implement current Stripe best practices for payment processing.
 
 use context7
 ```
@@ -336,20 +336,20 @@ Implement complete Supabase authentication system for Next.js 15 App Router with
 use context7
 ```
 
-### Stripe Connect Marketplace
+### Stripe Payment Processing
 ```
 @docs/specs/payment/PAYMENT.md
 @docs/specs/business-logic/BUSINESS-LOGIC.md
 @AGENTS.md
 
-Implement comprehensive Stripe Connect marketplace for drone services:
-- Express account onboarding with KYC verification
-- Payment intent creation with marketplace fee splitting (15% platform fee)
-- Escrow system holding funds until service completion
-- Webhook handling for payment events and account status updates
-- Provider dashboard with verification status and payout tracking
-- Consumer checkout with multiple payment methods and 3D Secure
-- Automatic payouts upon booking completion
+Implement comprehensive Stripe payment system for drone services:
+- Secure payment processing with verification
+- Payment intent creation with variable pricing structure
+- Secure transaction handling until service completion
+- Webhook handling for payment events and status updates
+- Provider dashboard with earnings and transaction tracking
+- Consumer checkout with multiple payment methods and secure authentication
+- Automatic payment confirmation upon booking completion
 - Refund handling for cancelled services
 
 use context7
@@ -426,7 +426,7 @@ use context7
 # Example with clear precedence:
 @docs/specs/payment/PAYMENT.md
 
-Implement our exact 15% platform fee structure and escrow system as specified, using Stripe Connect's current marketplace patterns for the technical implementation.
+Implement our variable pricing structure and secure payment handling as specified, using Stripe's current payment processing patterns for the technical implementation.
 
 use context7
 ```
@@ -490,7 +490,7 @@ After completing this step, you should have:
 - **Spec precedence**: Explicitly state "follow specifications first" in complex prompts
 - **Test Context7 integration**: Verify current patterns work with SkyMarket requirements
 - **Review systematically**: Use verification prompts with both specs and Context7
-- **Marketplace focus**: Prioritize Stripe Connect, Supabase, and Next.js 15 patterns
+- **Payment focus**: Prioritize Stripe payments, Supabase, and Next.js 15 patterns
 
 ## Next Steps
 

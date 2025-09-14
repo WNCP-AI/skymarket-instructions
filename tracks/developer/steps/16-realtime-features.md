@@ -343,7 +343,7 @@ For a marketplace prototype, this simple approach covers 90% of communication ne
 ## Next Steps
 
 In **Step 17: Stripe Setup**, you'll implement:
-- Stripe Connect marketplace payment infrastructure
+- Stripe payment processing infrastructure
 - Provider onboarding and payout setup
 - Payment processing for bookings
 - Webhook handling for payment events

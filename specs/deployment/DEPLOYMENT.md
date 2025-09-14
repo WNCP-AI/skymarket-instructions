@@ -11,7 +11,7 @@ SkyMarket is deployed as a modern serverless application using Vercel for hostin
 - Database: Supabase (PostgreSQL with real-time features)
 - Authentication: Supabase Auth
 - File Storage: Supabase Storage
-- Payments: Stripe Connect
+- Payments: Stripe
 - Email: Resend
 - Maps: Mapbox
 - AI: OpenAI
@@ -625,11 +625,11 @@ CREATE POLICY IF NOT EXISTS "admin_full_access" ON profiles
 
 ## Third-Party Service Configuration
 
-### Stripe Connect Setup
+### Stripe Setup
 
 ```javascript
-// Stripe Connect configuration
-const stripeConnectConfig = {
+// Stripe payment configuration
+const stripeConfig = {
   // Production settings
   production: {
     clientId: 'ca_...',

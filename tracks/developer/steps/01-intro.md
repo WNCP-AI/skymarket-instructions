@@ -111,11 +111,11 @@ Verify this implementation:
 ✓ Follows our TypeScript conventions
 ```
 
-## Real Example: Building Stripe Connect Marketplace
+## Real Example: Building Stripe Payment Processing
 
 Instead of manually implementing complex payment processing, you'll:
 
-1. **Load marketplace specifications**:
+1. **Load payment specifications**:
    ```
    @docs/specs/payment/PAYMENT.md
    @docs/specs/business-logic/BUSINESS-LOGIC.md
@@ -123,26 +123,26 @@ Instead of manually implementing complex payment processing, you'll:
    @AGENTS.md
    ```
 
-2. **Write comprehensive marketplace prompt**:
+2. **Write comprehensive payment prompt**:
    ```
-   Implement complete Stripe Connect marketplace payment system for SkyMarket drone services:
-   - Express account creation with KYC verification for providers
-   - Payment intent creation with 15% platform fee automation and escrow
-   - Webhook endpoints for payment events, account updates, payout notifications
-   - Consumer checkout flow with 3D Secure authentication
-   - Automatic fund release upon booking completion per business logic
+   Implement complete Stripe payment system for SkyMarket drone services:
+   - Secure payment processing with multiple payment methods
+   - Dynamic pricing with variable service fees
+   - Webhook endpoints for payment events and status updates
+   - Consumer checkout flow with secure authentication
+   - Automatic payment confirmation and order processing
 
    Integrate with Next.js 15 App Router, TypeScript, and Supabase database schema.
 
    use context7
    ```
 
-3. **Generate marketplace system**: AI creates production-ready payment infrastructure
-4. **Verify against marketplace specs**: Check fee calculations, escrow handling, webhook processing
+3. **Generate payment system**: AI creates production-ready payment infrastructure
+4. **Verify against payment specs**: Check pricing calculations, payment flows, webhook processing
 
 **Time saved**: Days → Hours
-**Complexity handled**: Production-ready marketplace payments with escrow
-**Quality**: Enterprise-grade Stripe Connect integration
+**Complexity handled**: Production-ready payment processing with secure handling
+**Quality**: Enterprise-grade Stripe integration
 
 ## Why This Approach is Revolutionary
 
@@ -172,7 +172,7 @@ You'll build a complete drone service marketplace featuring:
 - **Multi-role authentication** (consumers, providers, admins)
 - **Service marketplace** (4 categories: food, courier, aerial, mapping)
 - **Booking system** with scheduling and status tracking
-- **Payment processing** with Stripe Connect (15% platform fee)
+- **Payment processing** with Stripe payments (variable pricing)
 - **Real-time updates** via WebSocket subscriptions
 - **Email automation** for confirmations and notifications
 - **Interactive maps** with Detroit Metro geofencing
@@ -181,7 +181,7 @@ You'll build a complete drone service marketplace featuring:
 - **Frontend**: Next.js 15.5.2 with React 19 and TypeScript 5
 - **Backend**: Supabase (PostgreSQL, Auth, Realtime)
 - **Styling**: Tailwind CSS 4 + shadcn/ui components
-- **Payments**: Stripe Connect marketplace
+- **Payments**: Stripe payment processing
 - **Maps**: Mapbox GL JS
 - **Email**: Resend
 - **Deployment**: Vercel

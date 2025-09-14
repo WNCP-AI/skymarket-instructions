@@ -4,9 +4,9 @@
 
 ## Objective
 
-Implement comprehensive order management system that integrates payment status with booking lifecycle, automates provider payouts after service completion, handles disputes and refunds, and provides real-time order tracking for both consumers and providers.
+Implement comprehensive order management system that integrates payment status with booking lifecycle, handles payment confirmation after service completion, manages disputes and refunds, and provides real-time order tracking for both consumers and providers.
 
-**Learning Focus**: Build order tracking system with payment completion triggers, implement automatic payout system with Stripe Connect transfers, create dispute resolution workflow, and integrate with the booking system for seamless order lifecycle management.
+**Learning Focus**: Build order tracking system with payment completion triggers, implement automatic payment confirmation system with Stripe transactions, create dispute resolution workflow, and integrate with the booking system for seamless order lifecycle management.
 
 ## Context Setup
 
@@ -28,13 +28,13 @@ Load the required specification documents to understand SkyMarket's order manage
 
 **Key Specifications**:
 - Order lifecycle management with payment integration
-- Automatic payout triggers and timing requirements
+- Automatic payment confirmation triggers and timing requirements
 - Dispute handling and refund processing workflows
 - Real-time order status tracking and notifications
 
 ## Enhanced Context7 Integration
 
-Access comprehensive Stripe order management and payout documentation through natural language prompts. Simply add "use context7" to any implementation request to get current patterns for payouts, transfers, automatic disbursements, refund processing, dispute handling, chargeback protection, and order tracking with metadata management.
+Access comprehensive Stripe payment processing and transaction management documentation through natural language prompts. Simply add "use context7" to any implementation request to get current patterns for payments, transaction handling, payment confirmation, refund processing, dispute handling, chargeback protection, and order tracking with metadata management.
 
 ## Implementation Prompts
 
@@ -80,7 +80,7 @@ export class OrderManager {
           providers!inner(
             id,
             business_name,
-            stripe_account_id,
+            payment_account_id,
             user_id
           )
         )
@@ -138,7 +138,7 @@ export class OrderManager {
   private async handleStatusActions(order: any, status: OrderStatus, metadata: any) {
     switch (status) {
       case 'completed':
-        await this.triggerProviderPayout(order);
+        await this.confirmPayment(order);
         break;
       case 'disputed':
         await this.handleDispute(order, metadata);
@@ -149,33 +149,32 @@ export class OrderManager {
     }
   }
 
-  private async triggerProviderPayout(order: any) {
-    if (!order.stripe_payment_intent_id || !order.services.providers.stripe_account_id) {
-      console.error('Missing payment or provider account information');
+  private async confirmPayment(order: any) {
+    if (!order.stripe_payment_intent_id) {
+      console.error('Missing payment information');
       return;
     }
 
     try {
-      // Transfer funds to provider account
+      // Confirm payment completion
       const paymentIntent = await stripe.paymentIntents.retrieve(order.stripe_payment_intent_id);
 
-      if (paymentIntent.status === 'succeeded' && paymentIntent.transfer_data?.destination) {
-        // Funds are automatically transferred via transfer_data
-        // Record the payout in our system
+      if (paymentIntent.status === 'succeeded') {
+        // Record the payment completion in our system
         await this.supabase
-          .from('payouts')
+          .from('payment_confirmations')
           .insert({
             booking_id: order.id,
             provider_id: order.services.provider_id,
-            amount: paymentIntent.amount - (paymentIntent.application_fee_amount || 0),
+            amount: paymentIntent.amount,
             currency: paymentIntent.currency,
             stripe_payment_intent_id: paymentIntent.id,
-            status: 'paid',
-            paid_at: new Date().toISOString(),
+            status: 'confirmed',
+            confirmed_at: new Date().toISOString(),
           });
       }
     } catch (error) {
-      console.error('Failed to process provider payout:', error);
+      console.error('Failed to confirm payment:', error);
     }
   }
 
@@ -238,13 +237,13 @@ export class OrderManager {
 }
 ```
 
-### 2. Provider Payout Dashboard
+### 2. Provider Earnings Dashboard
 
-**Prompt**: "Using the payment specifications and Stripe Connect payout documentation, create a provider dashboard that shows earnings history, payout schedule, and payment status for completed services. Include proper formatting for currency display and integration with the order management system."
+**Prompt**: "Using the payment specifications and Stripe payment documentation, create a provider dashboard that shows earnings history, transaction status, and payment details for completed services. Include proper formatting for currency display and integration with the order management system."
 
 **Expected Implementation**:
 ```typescript
-// app/dashboard/provider/payouts/page.tsx
+// app/dashboard/provider/earnings/page.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -260,20 +259,20 @@ import {
   ExternalLink
 } from 'lucide-react';
 
-interface PayoutData {
+interface EarningsData {
   total_earnings: number;
-  pending_payouts: number;
-  completed_payouts: number;
-  recent_payouts: Array<{
+  pending_payments: number;
+  completed_payments: number;
+  recent_transactions: Array<{
     id: string;
     booking_id: string;
     amount: number;
     status: string;
-    paid_at: string | null;
+    confirmed_at: string | null;
     service_title: string;
     consumer_name: string;
   }>;
-  upcoming_payouts: Array<{
+  upcoming_transactions: Array<{
     id: string;
     amount: number;
     expected_date: string;
@@ -281,54 +280,54 @@ interface PayoutData {
   }>;
 }
 
-export default function ProviderPayoutsPage() {
-  const [data, setData] = useState<PayoutData | null>(null);
+export default function ProviderEarningsPage() {
+  const [data, setData] = useState<EarningsData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPayoutData();
+    loadEarningsData();
   }, []);
 
-  const loadPayoutData = async () => {
+  const loadEarningsData = async () => {
     try {
-      const response = await fetch('/api/provider/payouts');
-      const payoutData = await response.json();
-      setData(payoutData);
+      const response = await fetch('/api/provider/earnings');
+      const earningsData = await response.json();
+      setData(earningsData);
     } catch (error) {
-      console.error('Failed to load payout data:', error);
+      console.error('Failed to load earnings data:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const connectToStripe = async () => {
+  const setupPayments = async () => {
     try {
-      const response = await fetch('/api/provider/stripe/onboarding', {
+      const response = await fetch('/api/provider/payment/setup', {
         method: 'POST',
       });
       const { url } = await response.json();
       window.location.href = url;
     } catch (error) {
-      console.error('Failed to connect to Stripe:', error);
+      console.error('Failed to setup payments:', error);
     }
   };
 
   if (loading) {
-    return <div>Loading payout information...</div>;
+    return <div>Loading earnings information...</div>;
   }
 
   if (!data) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Payout Setup Required</CardTitle>
+          <CardTitle>Payment Setup Required</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="mb-4">
-            Complete your Stripe account setup to receive payments for your drone services.
+            Complete your payment account setup to receive payments for your drone services.
           </p>
-          <Button onClick={connectToStripe}>
-            Set Up Payouts
+          <Button onClick={setupPayments}>
+            Set Up Payments
           </Button>
         </CardContent>
       </Card>
@@ -356,15 +355,15 @@ export default function ProviderPayoutsPage() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Payouts</CardTitle>
+            <CardTitle className="text-sm font-medium">Pending Payments</CardTitle>
             <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {formatCurrency(data.pending_payouts)}
+              {formatCurrency(data.pending_payments)}
             </div>
             <p className="text-xs text-muted-foreground">
-              Services completed, awaiting payout
+              Services completed, awaiting payment confirmation
             </p>
           </CardContent>
         </Card>
@@ -376,77 +375,77 @@ export default function ProviderPayoutsPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {formatCurrency(data.completed_payouts)}
+              {formatCurrency(data.completed_payments)}
             </div>
             <p className="text-xs text-muted-foreground">
-              Paid out this month
+              Payments confirmed this month
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Recent Payouts */}
+      {/* Recent Transactions */}
       <Card>
         <CardHeader>
-          <CardTitle>Recent Payouts</CardTitle>
+          <CardTitle>Recent Transactions</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {data.recent_payouts.map((payout) => (
-              <div key={payout.id} className="flex items-center justify-between p-4 border rounded-lg">
+            {data.recent_transactions.map((transaction) => (
+              <div key={transaction.id} className="flex items-center justify-between p-4 border rounded-lg">
                 <div>
-                  <p className="font-medium">{payout.service_title}</p>
+                  <p className="font-medium">{transaction.service_title}</p>
                   <p className="text-sm text-muted-foreground">
-                    {payout.consumer_name}
+                    {transaction.consumer_name}
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    {payout.paid_at ? formatDate(payout.paid_at) : 'Processing'}
+                    {transaction.confirmed_at ? formatDate(transaction.confirmed_at) : 'Processing'}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="font-bold text-lg">
-                    {formatCurrency(payout.amount)}
+                    {formatCurrency(transaction.amount)}
                   </p>
                   <Badge
-                    variant={payout.status === 'paid' ? 'success' : 'warning'}
+                    variant={transaction.status === 'confirmed' ? 'success' : 'warning'}
                     className="text-xs"
                   >
-                    {payout.status}
+                    {transaction.status}
                   </Badge>
                 </div>
               </div>
             ))}
 
-            {data.recent_payouts.length === 0 && (
+            {data.recent_transactions.length === 0 && (
               <p className="text-center text-muted-foreground py-8">
-                No recent payouts to display
+                No recent transactions to display
               </p>
             )}
           </div>
         </CardContent>
       </Card>
 
-      {/* Upcoming Payouts */}
-      {data.upcoming_payouts.length > 0 && (
+      {/* Upcoming Transactions */}
+      {data.upcoming_transactions.length > 0 && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              Upcoming Payouts
+              Upcoming Transactions
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {data.upcoming_payouts.map((payout) => (
-                <div key={payout.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+              {data.upcoming_transactions.map((transaction) => (
+                <div key={transaction.id} className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                   <div>
-                    <p className="font-medium">{payout.service_title}</p>
+                    <p className="font-medium">{transaction.service_title}</p>
                     <p className="text-sm text-muted-foreground">
-                      Expected: {formatDate(payout.expected_date)}
+                      Expected: {formatDate(transaction.expected_date)}
                     </p>
                   </div>
                   <p className="font-bold">
-                    {formatCurrency(payout.amount)}
+                    {formatCurrency(transaction.amount)}
                   </p>
                 </div>
               ))}
@@ -455,18 +454,18 @@ export default function ProviderPayoutsPage() {
         </Card>
       )}
 
-      {/* Stripe Dashboard Link */}
+      {/* Payment Dashboard Link */}
       <Card>
         <CardHeader>
           <CardTitle>Manage Your Account</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Access your Stripe dashboard to view detailed payout information, update banking details, and manage tax documents.
+            Access your payment dashboard to view detailed transaction information, update payment details, and manage account settings.
           </p>
           <Button variant="outline" className="flex items-center gap-2">
             <ExternalLink className="h-4 w-4" />
-            Open Stripe Dashboard
+            Open Payment Dashboard
           </Button>
         </CardContent>
       </Card>
@@ -1024,8 +1023,8 @@ export function useOrderStatus(orderId: string) {
 # Test complete order flow
 # 1. Create booking with payment
 # 2. Provider marks service as completed
-# 3. Verify automatic payout processing
-# 4. Check payout appears in provider dashboard
+# 3. Verify automatic payment confirmation
+# 4. Check transaction appears in provider dashboard
 ```
 
 ### 2. Test Dispute System
@@ -1039,11 +1038,11 @@ export function useOrderStatus(orderId: string) {
 
 ### 3. Test Payout Automation
 ```bash
-# Use Stripe CLI to test payout webhooks
-stripe trigger payout.paid
-stripe trigger payout.failed
+# Use Stripe CLI to test payment webhooks
+stripe trigger payment_intent.succeeded
+stripe trigger payment_intent.payment_failed
 
-# Verify payout status updates in provider dashboard
+# Verify payment status updates in provider dashboard
 ```
 
 ## Expected Outcomes
@@ -1057,9 +1056,9 @@ After completing this step, you should have:
    - Integration with payment and booking systems
 
 2. **Provider Payout System**:
-   - Automatic payout triggers after service completion
-   - Comprehensive payout dashboard with earnings history
-   - Integration with Stripe Connect for secure transfers
+   - Automatic payment confirmation after service completion
+   - Comprehensive earnings dashboard with transaction history
+   - Integration with Stripe for secure payment processing
    - Payout scheduling and status tracking
 
 3. **Dispute Resolution System**:
@@ -1078,12 +1077,12 @@ After completing this step, you should have:
 
 ### Common Issues
 
-**Payout Automation Fails**:
+**Payment Confirmation Fails**:
 ```typescript
-// Check provider account status before payout
-const account = await stripe.accounts.retrieve(providerStripeId);
-if (!account.payouts_enabled) {
-  throw new Error('Provider payouts not enabled');
+// Check payment status before confirmation
+const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+if (paymentIntent.status !== 'succeeded') {
+  throw new Error('Payment not completed');
 }
 ```
 
@@ -1110,7 +1109,7 @@ const canRespond = (userRole === 'provider' && dispute.initiated_by === 'consume
 ### Testing Tips
 
 1. **Test All Status Transitions**: Verify each status change triggers appropriate actions
-2. **Test Payout Timing**: Ensure payouts occur only after service completion
+2. **Test Payment Timing**: Ensure payment confirmation occurs only after service completion
 3. **Test Dispute Scenarios**: Verify all dispute types and resolutions work correctly
 4. **Monitor Webhook Delivery**: Use Stripe Dashboard to verify webhook processing
 5. **Test Real-time Updates**: Verify WebSocket updates work across multiple browser tabs

@@ -163,18 +163,18 @@ Create complete Supabase authentication system for SkyMarket drone marketplace:
 use context7
 ```
 
-**Stripe Connect Marketplace Infrastructure:**
+**Stripe Payment Infrastructure:**
 ```
 @docs/specs/payment/PAYMENT.md
 @docs/specs/business-logic/BUSINESS-LOGIC.md
 @AGENTS.md
 
-Implement comprehensive Stripe Connect infrastructure for SkyMarket:
-- Express account creation with KYC verification for drone providers
-- Payment intent creation with exact 15% platform fee automation
-- Webhook endpoints for payment_intent.succeeded, account.updated, payout.paid
-- Escrow system holding funds until booking completion
-- Provider dashboard integration with earnings and verification status
+Implement comprehensive Stripe payment infrastructure for SkyMarket:
+- Secure payment processing with multiple payment methods
+- Payment intent creation with dynamic pricing
+- Webhook endpoints for payment_intent.succeeded and status updates
+- Secure transaction handling until booking completion
+- Provider dashboard integration with earnings tracking
 
 use context7
 ```
@@ -244,7 +244,7 @@ Build a complete Supabase authentication system with signup, login, and email ve
 
 **Payment Integration:**
 ```
-Create a Stripe Connect marketplace payment flow with escrow and webhook handling. use context7
+Create a Stripe payment processing flow with secure transactions and webhook handling. use context7
 ```
 
 **UI Development:**
@@ -274,24 +274,24 @@ Context7 + Specifications + AI = Optimal Development
 @docs/specs/architecture/DATABASE.md
 @AGENTS.md
 
-Implement complete Stripe Connect marketplace payment infrastructure for SkyMarket drone service platform:
+Implement complete Stripe payment infrastructure for SkyMarket drone service platform:
 
 **Core Payment System:**
-- Express account creation with comprehensive KYC verification for drone operators
-- Payment intent creation with precise 15% platform fee calculation and escrow handling
-- Webhook endpoints processing payment_intent.succeeded, account.updated, payout.paid events
-- Consumer checkout flow with 3D Secure authentication and multiple payment methods
+- Secure payment processing with comprehensive verification
+- Payment intent creation with dynamic pricing calculation
+- Webhook endpoints processing payment_intent.succeeded and status events
+- Consumer checkout flow with secure authentication and multiple payment methods
 
 **Provider Integration:**
-- Provider onboarding dashboard with verification status and requirements tracking
-- Earnings analytics with payout history and tax reporting features
-- Account capability management and compliance status monitoring
+- Provider earnings dashboard with transaction history tracking
+- Payment analytics with detailed reporting features
+- Transaction status monitoring and management
 - Integration with existing Supabase providers table and authentication system
 
 **Business Logic Integration:**
-- Automatic fund release triggered by booking completion (status: completed)
+- Automatic payment confirmation triggered by booking completion (status: completed)
 - Geographic validation for Detroit Metro service area compliance
-- Service category-specific fee handling for 4 drone service types
+- Service category-specific pricing handling for 4 drone service types
 - Integration with booking state machine and real-time status updates
 
 **Technical Requirements:**
@@ -300,7 +300,7 @@ Implement complete Stripe Connect marketplace payment infrastructure for SkyMark
 - Database transaction handling for payment and booking status synchronization
 - Real-time UI updates using Supabase subscriptions
 
-Use current Stripe Connect marketplace patterns, Next.js 15 best practices, and Supabase integration guidelines.
+Use current Stripe payment processing patterns, Next.js 15 best practices, and Supabase integration guidelines.
 
 use context7
 ```
@@ -356,7 +356,7 @@ npm cache clean --force
 
 **Problem**: Context7 doesn't recognize library in prompt
 **Solution**:
-- Be specific about library names in prompts: "Create a Stripe Connect Express account setup. use context7"
+- Be specific about library names in prompts: "Create a Stripe payment processing setup. use context7"
 - Include version numbers when relevant: "Implement Next.js 15 App Router patterns. use context7"
 - Try alternative library names: "Supabase" vs "supabase-js"
 - Not all libraries have Context7 documentation coverage
@@ -382,7 +382,7 @@ After completing this step, you should have:
 - [ ] Can generate current React patterns
 - [ ] Can access Next.js 15 App Router documentation
 - [ ] Can get current Supabase integration patterns
-- [ ] Can access Stripe Connect marketplace examples
+- [ ] Can access Stripe payment processing examples
 
 ### Spec-Driven Integration
 - [ ] Understand how to combine specs + Context7 + AI
@@ -399,7 +399,7 @@ After completing this step, you should have:
 - Be specific about the library, version, and implementation details
 
 **SkyMarket-Specific Patterns**:
-- **Stripe Connect**: "Implement Stripe Connect marketplace with Express accounts and 15% platform fees. use context7"
+- **Stripe Payments**: "Implement Stripe payment processing with secure transactions and variable pricing. use context7"
 - **Supabase + Next.js**: "Create Supabase authentication middleware for Next.js 15 App Router with TypeScript types. use context7"
 - **React Hook Form**: "Build a drone service booking form with React Hook Form, Zod validation, and date/time selection. use context7"
 

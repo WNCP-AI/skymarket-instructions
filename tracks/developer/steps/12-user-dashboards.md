@@ -67,7 +67,7 @@ Create production-ready user dashboards for SkyMarket drone service marketplace:
 - Service listing management with pricing and availability controls
 - Booking requests with accept/reject workflow and calendar integration
 - Earnings tracking with payout history and tax document access
-- Stripe Connect onboarding status and verification management
+- Stripe payment integration status and transaction management
 - Performance analytics with booking completion rates and customer ratings
 
 Use Next.js 15 App Router, React Server Components, and shadcn/ui components.

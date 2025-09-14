@@ -191,9 +191,9 @@ export function ClientComponent() {
 - Dynamic navigation and menu items
 
 ### Payment Integration
-- Stripe Connect marketplace patterns
-- Escrow system integration
-- Fee calculation display (15% platform fee)
+- Stripe payment processing patterns
+- Secure checkout flow integration
+- Variable pricing calculation and display
 
 ## Accessibility Features
 

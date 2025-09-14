@@ -334,7 +334,7 @@ project-root/
 │       │   └── MAPBOX.md         # Interactive map integration
 │       │
 │       ├── payment/
-│       │   └── PAYMENT.md        # Stripe Connect marketplace
+│       │   └── PAYMENT.md        # Stripe payment processing
 │       │
 │       ├── realtime/
 │       │   └── REALTIME.md       # Supabase live subscriptions
@@ -411,7 +411,7 @@ Understand the project requirements and implement a new booking feature followin
 #### 2. Reference Specifications During Implementation
 ```
 @docs/specs/payment/PAYMENT.md @docs/specs/forms/FORMS.md
-Create a checkout form that integrates with Stripe Connect following our marketplace patterns
+Create a checkout form that integrates with Stripe payment processing for service bookings
 ```
 
 #### 3. Maintain Architecture Consistency

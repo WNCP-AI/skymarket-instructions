@@ -21,7 +21,7 @@ Instead of manually coding everything, you'll learn to:
 - **User Authentication**: Supabase Auth with role-based access control
 - **Service Management**: Provider dashboard with FAA Part 107 compliance
 - **Booking System**: Complete flow with scheduling and Detroit geofencing
-- **Payment Processing**: Stripe Connect marketplace with 15% platform fee
+- **Payment Processing**: Stripe payment processing with variable pricing
 - **Real-time Features**: Live updates via Supabase subscriptions
 - **Email Automation**: Transactional emails with Resend
 - **Interactive Maps**: Mapbox with service area boundaries
@@ -32,7 +32,7 @@ Instead of manually coding everything, you'll learn to:
 - **Frontend**: Next.js 15.5.2, React 19, TypeScript 5
 - **Backend**: Supabase (PostgreSQL, Auth, Realtime)
 - **UI**: Tailwind CSS 4 + shadcn/ui components
-- **Payments**: Stripe Connect marketplace
+- **Payments**: Stripe payment processing
 - **Maps**: Mapbox GL JS
 - **Email**: Resend
 - **AI Tools**: Cursor IDE + MCP Context7
@@ -103,9 +103,9 @@ Implement business logic and core features using multiple specifications.
 16. **[Real-time Features](./steps/16-realtime-features.md)** - Live updates and messaging
 
 ### Phase 5: Payment Integration (Steps 17-19)
-Add Stripe Connect marketplace payments with escrow.
+Add Stripe payment processing with secure transactions.
 
-17. **[Stripe Setup](./steps/17-stripe-setup.md)** - Connect account configuration
+17. **[Stripe Setup](./steps/17-stripe-setup.md)** - Payment system configuration
 18. **[Payment Flow](./steps/18-payment-flow.md)** - Checkout and webhooks
 19. **[Order Management](./steps/19-order-management.md)** - Order tracking and fulfillment
 
@@ -150,7 +150,7 @@ The power of this approach comes from comprehensive specifications. Explore thes
 - **[Email](../../specs/email/EMAIL.md)** - Transactional email patterns
 - **[Forms](../../specs/forms/FORMS.md)** - Form handling and validation
 - **[Maps](../../specs/maps/MAPBOX.md)** - Mapbox integration
-- **[Payment](../../specs/payment/PAYMENT.md)** - Stripe Connect setup
+- **[Payment](../../specs/payment/PAYMENT.md)** - Stripe payment setup
 - **[Real-time](../../specs/realtime/REALTIME.md)** - WebSocket features
 - **[Security](../../specs/security/SECURITY.md)** - Auth and compliance
 - **[Webhooks](../../specs/webhooks/WEBHOOKS.md)** - Event handling

@@ -12,7 +12,7 @@ This repository contains comprehensive learning tracks and specifications for bu
 Build SkyMarket from scratch using AI tools and comprehensive specifications:
 - **Next.js 15.5.2** + React 19 + TypeScript 5
 - **Supabase** database with RLS policies and real-time features
-- **Stripe Connect** marketplace with 15% platform fee
+- **Stripe** payment processing for service bookings
 - **AI Integration** with OpenAI GPT-4o-mini
 - **Cursor IDE** + MCP Context7 for AI-assisted development
 
@@ -24,7 +24,7 @@ Build SkyMarket from scratch using AI tools and comprehensive specifications:
 | **Project Setup** | 7-9 | 2 hours | Next.js init, styling system, landing pages |
 | **Core Platform** | 10-12 | 2-3 hours | Database, authentication, user dashboards |
 | **Marketplace** | 13-16 | 3-4 hours | CRUD operations, booking system, maps, real-time |
-| **Payments** | 17-19 | 2-3 hours | Stripe Connect, escrow, webhooks |
+| **Payments** | 17-19 | 2-3 hours | Stripe payments, checkout, webhooks |
 | **Production** | 20-21 | 1-2 hours | Email automation, Vercel deployment |
 
 ### 🚀 Expert Track (8-12 hours)
@@ -120,7 +120,7 @@ Both tracks use the same modern development stack:
 - **[Business Logic](./specs/business-logic/BUSINESS-LOGIC.md)** - Detroit-specific rules
 
 **Integrations & Features**
-- **[Payment](./specs/payment/PAYMENT.md)** - Stripe Connect marketplace
+- **[Payment](./specs/payment/PAYMENT.md)** - Stripe payment integration
 - **[Webhooks](./specs/webhooks/WEBHOOKS.md)** - Event handling and processing
 - **[Email](./specs/email/EMAIL.md)** - Resend integration patterns
 - **[Maps](./specs/maps/MAPBOX.md)** - Interactive map features
@@ -135,7 +135,7 @@ Both tracks use the same modern development stack:
 
 ## 🏗️ SkyMarket Platform Overview
 
-**What You'll Build**: A complete drone service marketplace serving Detroit Metro area with 4 service categories, Stripe Connect payments, and AI-powered customer support.
+**What You'll Build**: A complete drone service platform serving Detroit Metro area with 4 service categories, Stripe payments, and AI-powered customer support.
 
 ### Core Business Model
 - **Service Categories**: Food delivery, courier services, aerial imaging, site mapping
@@ -154,7 +154,7 @@ Frontend Layer          Backend Services           Infrastructure
 │ AI Chat         │     └─────────────────┘       └─────────────────┘
 └─────────────────┘              │                         │
          │                   ┌─────────────────┐       ┌─────────────────┐
-         │                   │ Stripe Connect  │       │ PostgreSQL DB  │
+         │                   │ Stripe Payments │       │ PostgreSQL DB  │
          │                   │ OpenAI GPT-4o   │       │ File Storage    │
          │                   │ Mapbox Maps     │       │ Email Service   │
          │                   │ Resend Email    │       │ Monitoring      │
@@ -169,7 +169,7 @@ Frontend Layer          Backend Services           Infrastructure
 - Authentication & authorization system
 - Service listing management (4 categories)
 - End-to-end booking flow with status tracking
-- Stripe Connect marketplace with escrow
+- Stripe payment processing with secure checkout
 - AI customer support (OpenAI GPT-4o-mini)
 - Real-time infrastructure and messaging
 - 8 production API endpoints

@@ -975,7 +975,7 @@ You've created a production-ready drone service marketplace with:
 **Core Features:**
 - Complete authentication system with role-based access
 - Comprehensive database schema with type safety
-- Advanced booking and payment processing with Stripe Connect
+- Advanced booking and payment processing with Stripe payments
 - Professional email automation system
 - Real-time features and responsive design
 - Production deployment with monitoring
@@ -999,7 +999,7 @@ You've created a production-ready drone service marketplace with:
 - **Next.js 15 & React 19**: Latest framework features and patterns
 - **TypeScript**: Advanced type safety and development practices
 - **Supabase**: Database design, RLS, and real-time features
-- **Stripe Connect**: Marketplace payment processing
+- **Stripe Payments**: Secure payment processing
 - **Production Deployment**: Vercel, CI/CD, monitoring, and optimization
 - **Spec-Driven Development**: Systematic approach to feature development
 

@@ -2,7 +2,7 @@
 
 **Version**: 4.0
 **Date**: January 15, 2025
-**Tech Stack**: Next.js 15.5.2 + React 19 + Supabase + Tailwind CSS 4 + Stripe Connect + OpenAI + Mapbox + Resend
+**Tech Stack**: Next.js 15.5.2 + React 19 + Supabase + Tailwind CSS 4 + Stripe + OpenAI + Mapbox + Resend
 **Implementation Status**: Core MVP Complete with Payment Processing and AI Integration
 
 ## Executive Summary
@@ -11,7 +11,7 @@ SkyMarket is a multi-modal drone service marketplace serving the greater Detroit
 
 ### Key Value Propositions
 - **For Consumers**: AI-powered service matching, transparent pricing, real-time tracking with live map, secure escrow payments
-- **For Providers**: Steady income stream, professional compliance dashboard, instant payouts via Stripe Connect, AI chatbot support
+- **For Providers**: Steady income stream, professional compliance dashboard, streamlined payment processing, AI chatbot support
 - **For Market**: Unified multi-modal platform, verified operators with FAA compliance, comprehensive insurance coverage, Detroit-optimized service areas
 
 ## Business Goals
@@ -84,7 +84,7 @@ SkyMarket is a multi-modal drone service marketplace serving the greater Detroit
 - [x] Booking status lifecycle (pending → accepted → in_progress → completed)
 
 ### Phase 4: Payment Processing ✅ COMPLETE
-- [x] Stripe Connect integration with marketplace model
+- [x] Stripe payment integration for service bookings
 - [x] Secure checkout flow with Stripe Checkout Sessions
 - [x] Escrow payments with manual capture for service completion
 - [x] Platform fee calculation (15% of service price)
@@ -122,7 +122,7 @@ SkyMarket is a multi-modal drone service marketplace serving the greater Detroit
 - **Authentication System**: Supabase Auth with JWT, middleware, and session management
 - **Service Listings**: Full CRUD for drone and courier services with 4 categories
 - **Booking System**: End-to-end booking flow with validation and status management
-- **Payment Processing**: Stripe Connect with escrow, webhooks, and marketplace fees
+- **Payment Processing**: Stripe payments with secure checkout and webhooks
 - **AI Assistant**: OpenAI GPT-4o-mini integration with fallback modes
 - **Real-time Infrastructure**: Supabase Realtime subscriptions ready
 
@@ -190,10 +190,10 @@ SkyMarket is a multi-modal drone service marketplace serving the greater Detroit
 - **Realtime**: WebSocket subscriptions for live tracking and messaging
 - **Edge Functions**: Custom business logic and webhook processing
 
-#### Stripe Connect
+#### Stripe Payments
 - **Payments**: PaymentIntents with 3D Secure authentication
-- **Escrow**: Automatic fund holds with 24-hour release window
-- **Marketplace**: Express accounts for provider instant payouts
+- **Processing**: Secure checkout flow with variable pricing
+- **Management**: Order tracking and payment status updates
 - **Webhooks**: Comprehensive event handling with signature verification
 - **Dashboard**: Provider earnings and payout management
 
@@ -390,7 +390,7 @@ SkyMarket is a multi-modal drone service marketplace serving the greater Detroit
 - [x] User profiles and provider onboarding structure
 
 ### Phase 2: Core Marketplace ✅ COMPLETED (Jan 2025)
-- [x] Stripe Connect integration with escrow payments and marketplace model
+- [x] Stripe payment integration with secure checkout
 - [x] Complete service listing CRUD with 4 service categories
 - [x] End-to-end booking system with comprehensive validation
 - [x] Payment processing with Stripe Checkout and webhook handling
@@ -573,7 +573,7 @@ Indexes present for common queries; FTS on `listings(title, description)` exists
 ## Open Questions & Assumptions
 
 - Payments: escrow flow details and when funds are captured (on accept vs on complete?).
-- Stripe Connect: will providers receive instant payouts (Express accounts) at launch?
+- Payment Processing: timing of fund transfers after service completion?
 - Cancellation policy: windows, fees, and who can cancel when.
 - Reviews: can providers review consumers too in MVP or later only?
 - Aerial jobs: weather gating and reschedule rules.
