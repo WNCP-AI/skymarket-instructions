@@ -16,6 +16,9 @@ Master the strategic decision-making process for choosing between Vercel AI SDK 
 - Experience with production deployment and security considerations
 - Knowledge of enterprise architecture patterns and trade-offs
 
+[![AI SDK Tools vs MCP](https://img.youtube.com/vi/wtAk9eVAUGU/0.jpg)](https://www.youtube.com/watch?v=wtAk9eVAUGU)
+
+
 ## Decision Framework Architecture
 
 ### Core Architectural Principles

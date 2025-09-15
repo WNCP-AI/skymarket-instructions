@@ -1,4 +1,4 @@
-# Expert Step 05: Cursor AI Development Mastery - Production AI Patterns
+# Expert Step 05: Cursor AI Development
 
 ## Objective
 Master advanced Cursor prompting techniques for AI-powered development workflows. Learn spec-driven development, context-aware prompting, and production deployment patterns for AI features.

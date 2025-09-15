@@ -1,386 +1,115 @@
-# Step 3: Cursor IDE Installation
+ i# Step 3: Cursor — Quick Start
+
+Get Cursor installed and productive fast. Covers setup, models, agent modes, and core functionality.
 
 ## Objective
 
-Install and configure Cursor IDE as your primary development environment for AI-assisted, spec-driven development.
+Install Cursor, pick the right model, know the agent modes, and use the features that matter.
 
-## What is Cursor IDE?
+## 1) Setup
 
-Cursor is a code editor built specifically for AI-assisted programming. It integrates Claude directly into your development workflow, making it perfect for spec-driven development where you load specifications as context and generate implementation code.
+### Install
 
-### Why Cursor for Spec-Driven Development?
-
-- **Native AI Integration**: Claude is built into the editor
-- **Context Loading**: Easy `@` mention system for loading files
-- **Smart Autocomplete**: AI-powered code completion
-- **Chat Interface**: Cmd+L/Ctrl+L for conversational coding
-- **File Context**: AI understands your entire project structure
-
-## Installation
-
-### Download Cursor
-
-1. **Visit the Official Site**
-   - Go to [cursor.com](https://cursor.com)
-   - Click "Download for [Your OS]"
-
-2. **Choose Your Platform**
-   - **macOS**: Download `.dmg` file
-   - **Windows**: Download `.exe` installer
-   - **Linux**: Download `.AppImage` or `.deb` package
-
-### Installation Steps
-
-#### macOS Installation
 ```bash
-# If downloaded via browser:
-1. Open the downloaded .dmg file
-2. Drag Cursor to Applications folder
-3. Launch from Applications or Spotlight
-
-# Or install via Homebrew Cask:
+# macOS
 brew install --cask cursor
 ```
 
-#### Windows Installation
 ```bash
-# Run the downloaded installer
-1. Double-click the .exe file
-2. Follow installation wizard
-3. Choose installation directory
-4. Launch from Start Menu or Desktop
-
-# Or install via winget:
+# Windows
 winget install Cursor.Cursor
 ```
 
-#### Linux Installation
 ```bash
-# For .AppImage:
-chmod +x cursor-*.AppImage
-./cursor-*.AppImage
-
-# For .deb (Ubuntu/Debian):
-sudo dpkg -i cursor-*.deb
-sudo apt-get install -f  # Fix any dependencies
-
-# Or use snap:
-sudo snap install cursor --classic
+# Linux (download)
+# Grab the latest from the website if your package manager doesn’t have Cursor.
+# https://cursor.com
 ```
 
-## First Launch Setup
+### First run
 
-### 1. Initial Configuration
+- Sign in with GitHub/Google.
+- Toggle AI pane: `Cmd/Ctrl + L`.
+- Open Cursor Settings: `Cmd/Ctrl + Shift + J` (or Command Palette).
 
-When you first open Cursor:
+### Optional but useful
 
-1. **Accept Terms**: Read and accept the terms of service
-2. **Sign In**: Create account or sign in with GitHub/Google
-3. **Import Settings** (optional): Import VS Code settings if available
+- Enable Long Context Chat: Settings → Beta → Long Context Chat. Toggle chat modes with `Cmd/Ctrl + .`.
+- Add API keys if you want to use your own quotas/models: Settings → Models → OpenAI / Anthropic / Google / Azure → Verify.
 
-### 2. AI Setup
-
-Configure Claude integration:
-
-1. **AI Model Selection**:
-   - Click the AI button in the bottom right
-   - Verify Claude is selected as your model
-   - Check that you have access to Claude 3.5 Sonnet
-
-2. **Subscription** (if needed):
-   - Cursor Pro provides unlimited AI usage
-   - Free tier has usage limits
-   - Consider upgrading for this tutorial
-
-### 3. Essential Extensions
-
-Install these key extensions for our stack:
-
-```
-Extensions to install:
-1. TypeScript and JavaScript Support (usually pre-installed)
-2. Tailwind CSS IntelliSense
-3. ES7+ React/Redux/React-Native snippets
-4. Prettier - Code formatter
-5. ESLint
-6. GitLens
+```plaintext
+# .cursorignore (same syntax as .gitignore)
+dist/
+*.log
+config.json
 ```
 
-**Installation Process**:
-1. Press `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux)
-2. Search for each extension
-3. Click "Install"
+```plaintext
+# .cursorrules (project-specific AI rules)
+# e.g., architecture, style, review focus
+```
 
-## Configuration for Spec-Driven Development
+## 2) Models
 
-### 1. Workspace Settings
+- Select a model from the dropdown in Chat or with `Cmd/Ctrl + K`.
+- Good defaults: GPT‑4o, Claude 3.5 Sonnet, `cursor-small` (fast, unlimited).
+- Add custom model names: Settings → Models → Model Names.
+- Long‑context examples: `gpt-4o-128k`, `gemini-1.5-flash-500k`, `claude-3/3.5 sonnet 200k`, `claude-3 haiku 200k`.
+- Context limits (practical): Chat ~20k tokens; Cmd‑K ~10k; Long Context uses model max.
 
-Create optimal settings for our workflow:
+## 3) Agent modes
 
-**File** → **Preferences** → **Settings** (or `Cmd+,`)
+- Chat (AI pane): `Cmd/Ctrl + L`. Use `@file` mentions. Long Context toggles with `Cmd/Ctrl + .`.
+- Inline Cmd‑K: `Cmd/Ctrl + K` for precise, file‑scoped edits. Uses chunking strategies (auto, full file, outline, chunks).
+- Tab (autocomplete): ghost text for inserts; diff popups for modifications.
+  - Accept `Tab`, reject `Esc`, partial accept next word `Cmd/Ctrl + →`.
+  - Cursor predicts next edit locations; keep tapping `Tab` to step through.
+- AI Review: review Working State, Diff with main, or Last commit.
 
-Add these settings:
+## 4) Core functionality
+
+- Apply code from Chat: click ▶ in a chat code block to edit files.
+  - Accept `Cmd/Ctrl + Enter`, reject `Cmd/Ctrl + Backspace` in the diff.
+- AI Fix linter errors: hover error → AI fix, or `Cmd/Ctrl + Shift + E`.
+- Toggle AI pane: `Cmd/Ctrl + L`. Chat history: AI pane button or `Cmd/Ctrl + Alt/Option + L`.
+- Peek views + Tab: works in definition peek (great for propagating signature changes). Vim: `gd` then accept Cursor edits.
+- Chat settings: Settings → Features → Chat (Always search web, Default to no context, Auto scroll, etc.).
+- Corporate proxy edge case: disable HTTP/2 in settings JSON.
 
 ```json
 {
-  "editor.fontSize": 14,
-  "editor.lineHeight": 1.5,
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "files.exclude": {
-    "node_modules": true,
-    ".next": true,
-    "out": true,
-    ".env.local": true
-  },
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "cursor.general.disableHttp2": true
 }
 ```
 
-### 2. Cursor-Specific Settings
-
-Configure AI features:
-
-1. **Open Settings** → Search for "cursor"
-2. **AI Settings**:
-   - Enable "Auto-complete suggestions"
-   - Enable "Code context awareness"
-   - Set context length to maximum available
-
-3. **Chat Settings**:
-   - Enable "Use project context"
-   - Enable "Include file tree in context"
-
-### 3. Keyboard Shortcuts
-
-Memorize these essential shortcuts:
-
-```
-AI Chat: Cmd+L (Mac) / Ctrl+L (Windows/Linux)
-AI Inline: Cmd+K (Mac) / Ctrl+K (Windows/Linux)
-Command Palette: Cmd+Shift+P / Ctrl+Shift+P
-File Explorer: Cmd+Shift+E / Ctrl+Shift+E
-Search: Cmd+Shift+F / Ctrl+Shift+F
-Terminal: Cmd+` / Ctrl+`
-```
-
-## Testing Your Setup
-
-### 1. Create Test Project
-
-Let's verify everything works:
+## 5) Quick smoke test
 
 ```bash
-# Create a test directory
-mkdir cursor-test
-cd cursor-test
-
-# Initialize a simple project
-echo "console.log('Hello from Cursor!');" > test.js
-
-# Open in Cursor
+mkdir cursor-quickstart && cd $_
+printf "console.log('Hello from Cursor!')\n" > test.js
 cursor .
 ```
 
-### 2. Test AI Features
+1. Chat: `Cmd/Ctrl + L` → ask “Explain test.js” → add `@test.js`.
+2. Cmd‑K: open `test.js` → `Cmd/Ctrl + K` → “add try/catch logging”.
+3. Tab: type a function signature and accept suggestions with `Tab`.
 
-#### Test 1: Basic Chat
-1. Press `Cmd+L` / `Ctrl+L` to open chat
-2. Type: "Explain what this JavaScript code does"
-3. Drag `test.js` into the chat or use `@test.js`
-4. Verify you get a response about console.log
+## 6) Shortcuts you’ll actually use
 
-#### Test 2: Context Loading
-1. In chat, type: `@test.js`
-2. Verify the file appears in context
-3. Ask: "Add error handling to this code"
-4. Check that AI provides relevant suggestions
-
-#### Test 3: Code Generation
-1. Create new file: `example.ts`
-2. Press `Cmd+K` / `Ctrl+K` for inline AI
-3. Type: "Create a TypeScript function that adds two numbers"
-4. Verify AI generates appropriate TypeScript code
-
-## Optimizing for SkyMarket Development
-
-### 1. Project Structure Awareness
-
-Configure Cursor to understand our project:
-
-1. **Add to workspace settings** (`.vscode/settings.json`):
-```json
-{
-  "typescript.preferences.includePackageJsonAutoImports": "on",
-  "typescript.suggest.autoImports": true,
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "tailwindCSS.includeLanguages": {
-    "typescript": "javascript",
-    "typescriptreact": "javascript"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    "class:\\s*?[\"'`]([^\"'`]*).*?[\"'`]",
-    "(?:enter|leave)(?:From|To)?:\\s*?[\"'`]([^\"'`]*).*?[\"'`]"
-  ]
-}
+```plaintext
+AI Chat: Cmd/Ctrl + L
+Inline: Cmd/Ctrl + K
+Partial accept next word: Cmd/Ctrl + →
+Accept/Reject applied edit: Cmd/Ctrl + Enter / Cmd/Ctrl + Backspace
+Toggle chat modes (Long Context): Cmd/Ctrl + .
+Command Palette: Cmd/Ctrl + Shift + P
 ```
 
-### 2. Snippet Configuration
+## 7) Minimal troubleshooting
 
-Add useful snippets for our stack:
+- AI not responding: sign out/in, check usage/plan, confirm network, try another model.
+- Context too big/slow: reduce `@file`s; use Cmd‑K (chunks) or Long Context.
+- Corporate proxy issues: set `cursor.general.disableHttp2` as above.
+- Extensions flaky: Command Palette → “Reload Window”.
 
-**Create** `.vscode/snippets.json`:
-```json
-{
-  "Next.js Page Component": {
-    "prefix": "npage",
-    "body": [
-      "export default function ${1:PageName}() {",
-      "  return (",
-      "    <div className=\"${2:container}\">",
-      "      <h1>${3:Page Title}</h1>",
-      "    </div>",
-      "  )",
-      "}"
-    ]
-  },
-  "Supabase Client": {
-    "prefix": "supa",
-    "body": [
-      "import { createClient } from '@/lib/supabase/client'",
-      "",
-      "const supabase = createClient()"
-    ]
-  }
-}
-```
-
-### 3. File Associations
-
-Set up file associations for our project:
-
-```json
-{
-  "files.associations": {
-    "*.css": "tailwindcss",
-    ".env.local": "dotenv",
-    ".env.example": "dotenv"
-  }
-}
-```
-
-## Troubleshooting
-
-### Common Installation Issues
-
-**Problem**: Cursor won't start after installation
-**Solution**:
-- Check system requirements (64-bit OS required)
-- Try running as administrator (Windows) or with sudo (Linux)
-- Verify antivirus isn't blocking the application
-
-**Problem**: AI features not working
-**Solution**:
-- Check internet connection
-- Sign out and sign back in
-- Verify account has AI access
-- Check usage limits
-
-**Problem**: Extensions not installing
-**Solution**:
-- Disable firewall temporarily
-- Clear extension cache: `Cmd+Shift+P` → "Reload Window"
-- Try installing extensions manually from marketplace
-
-### Performance Issues
-
-**Problem**: Cursor running slowly
-**Solution**:
-- Close unnecessary files and tabs
-- Disable unused extensions
-- Increase memory allocation in preferences
-- Close other resource-intensive applications
-
-**Problem**: AI responses are slow
-**Solution**:
-- Reduce context size (don't load too many files)
-- Use more specific prompts
-- Check network connection
-- Consider upgrading to Cursor Pro
-
-### File Context Issues
-
-**Problem**: `@` mentions not finding files
-**Solution**:
-- Ensure file exists and is saved
-- Check file permissions
-- Reload window: `Cmd+Shift+P` → "Reload Window"
-- Verify correct project root is open
-
-## Expected Outcome
-
-After completing this step, you should have:
-
-### Working Cursor Installation
-- [ ] Cursor IDE installed and launches successfully
-- [ ] Signed in with account
-- [ ] AI features (Claude) working
-- [ ] Can access chat with `Cmd+L`/`Ctrl+L`
-
-### Proper Configuration
-- [ ] Essential extensions installed
-- [ ] Settings configured for our stack
-- [ ] Keyboard shortcuts memorized
-- [ ] File associations set up
-
-### Verified AI Features
-- [ ] Chat interface responds to questions
-- [ ] `@` file mentions work correctly
-- [ ] Inline AI (`Cmd+K`/`Ctrl+K`) functions
-- [ ] Code completion suggestions appear
-
-## Pro Tips
-
-### Context Management
-- **Be selective**: Don't load too many files at once
-- **Use specific files**: `@filename` rather than entire folders
-- **Clear context**: Start fresh chats for different topics
-- **Verify loading**: Check that files appear in context sidebar
-
-### Prompt Writing
-- **Be specific**: "Create a TypeScript interface for user data" vs "make interface"
-- **Include requirements**: Reference specs when available
-- **Ask for explanations**: "Explain why you chose this approach"
-- **Request verification**: "Check this against the requirements"
-
-### Workflow Optimization
-- **Multiple windows**: Open specs in second window
-- **Split panes**: Keep chat open while coding
-- **Quick access**: Pin frequently used files
-- **Terminal integration**: Use built-in terminal for commands
-
-## Next Steps
-
-Perfect! Cursor IDE is installed and configured for spec-driven development. Next, we'll set up MCP Context7 to access official library documentation.
-
-### What's Coming in Step 4
-- Install and configure MCP Context7 server
-- Connect Context7 to Cursor IDE
-- Test official documentation access
-- Learn Context7 command syntax
-
----
-
-**Next Step**: [Step 4: MCP Context7 Setup](./04-mcp-context7.md) →
-
-**Quick Links**:
-- [Previous: Environment Setup](./02-environment-setup.md)
-- [Track Overview](../README.md)
-- [Project Specifications](../../../specs/)
-
-
+Next: set up Context7 so Cursor can pull official docs in‑chat.
