@@ -52,9 +52,9 @@ config.json
 ## 2) Models
 
 - Select a model from the dropdown in Chat or with `Cmd/Ctrl + K`.
-- Good defaults: GPT‑4o, Claude 3.5 Sonnet, `cursor-small` (fast, unlimited).
+- Good defaults: GPT‑5, Claud 4 Sonnet, `cursor-small` (fast, unlimited).
 - Add custom model names: Settings → Models → Model Names.
-- Long‑context examples: `gpt-4o-128k`, `gemini-1.5-flash-500k`, `claude-3/3.5 sonnet 200k`, `claude-3 haiku 200k`.
+- Long‑context examples: `gpt-5`, `gemini-1.5-flash-500k`, `claude-4 sonnet 200k`.
 - Context limits (practical): Chat ~20k tokens; Cmd‑K ~10k; Long Context uses model max.
 
 ## 3) Agent modes

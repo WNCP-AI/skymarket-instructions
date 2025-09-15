@@ -18,7 +18,7 @@ Context is everything the AI knows about your request. In spec-driven developmen
 Cursor has a limited context window (similar to human short-term memory). Managing this efficiently is crucial for effective spec-driven development.
 
 **Context Window Sizes**:
-- **Claude 3.5 Sonnet**: ~200K tokens (~150K words)
+- **Claude 4 Sonnet**: ~200K tokens (~150K words)
 - **Typical spec file**: 2-5K tokens
 - **Context7 response**: 3-8K tokens
 - **Conversation**: Grows over time
