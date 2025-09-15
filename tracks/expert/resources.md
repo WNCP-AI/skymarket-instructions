@@ -12,8 +12,8 @@ Advanced resources for AI integration, architectural patterns, and sophisticated
   - Rate Limits & Pricing
 
 - **GPT Models**: [platform.openai.com/docs/models](https://platform.openai.com/docs/models)
+  - GPT-5
   - GPT-4 Turbo
-  - GPT-3.5 Turbo
   - Embedding Models
   - Model Comparison
 
