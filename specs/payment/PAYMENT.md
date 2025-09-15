@@ -84,7 +84,7 @@ The checkout interface must:
 
 ```
 Create a React component at components/checkout/CheckoutForm.tsx that:
-1. Uses Stripe Elements (PaymentElement) for card collection
+1. Uses Stripe Elements (PaymentElement) for card collection or simply the stripe checkout process
 2. Accepts orderId and amount as props
 3. Shows the total amount prominently
 4. Includes a submit button that says "Pay $[amount]"
