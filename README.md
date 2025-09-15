@@ -4,6 +4,8 @@
 
 This repository contains comprehensive learning tracks and specifications for building SkyMarket, a multi-modal marketplace connecting consumers with drone operators and couriers in the Detroit Metro area. Master modern AI-assisted development with Cursor IDE, MCP Context7, and spec-driven development.
 
+[![Introduction to the Buildathon](https://img.youtube.com/vi/gDUnKswBe-M/0.jpg)](https://www.youtube.com/watch?v=gDUnKswBe-M)
+
 ## 🏁 Choose Your Buildathon Track
 
 ### 🎯 Developer Track (12-16 hours)
