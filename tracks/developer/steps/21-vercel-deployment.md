@@ -4,6 +4,9 @@
 
 Deploy the complete SkyMarket application to production using Vercel with comprehensive configuration, monitoring, and optimization. This final step demonstrates enterprise-ready deployment practices including CI/CD pipelines, performance optimization, security hardening, and post-deployment monitoring.
 
+## Debugging and GUI
+[![Debugging and GUI](https://img.youtube.com/vi/41LSayFScoI/0.jpg)](https://www.youtube.com/watch?v=41LSayFScoI)
+
 ## Context Setup
 
 This step brings together all previous implementations for production deployment:
